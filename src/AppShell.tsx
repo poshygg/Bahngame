@@ -15,7 +15,14 @@ import { LanguageSwitch } from "./components/LanguageSwitch";
 import { getCountryStages } from "./data/countries";
 import { type Stage } from "./data/stages";
 import { type Run } from "./game/engine";
-import { getNextStage, isStageUnlocked, saveResult } from "./game/progress";
+import {
+  createPlayer,
+  getNextStage,
+  isStageUnlocked,
+  renamePlayer,
+  saveResult,
+  setActivePlayer,
+} from "./game/progress";
 import { useProgress } from "./hooks/useProgress";
 import { JourneyPanel, type Panel } from "./features/settings/JourneyPanel";
 import { TutorialScreen } from "./features/tutorial/TutorialScreen";
@@ -59,6 +66,12 @@ function AppContent() {
     setTutorial(false);
   };
   const nextStage = journey ? getNextStage(journey.stage) : undefined;
+  const createPlayerAccount = (nickname: string) =>
+    setProgress((previous) => createPlayer(previous, nickname));
+  const switchPlayer = (playerId: string) =>
+    setProgress((previous) => setActivePlayer(previous, playerId));
+  const updatePlayerNickname = (playerId: string, nickname: string) =>
+    setProgress((previous) => renamePlayer(previous, playerId, nickname));
   return (
     <SafeAreaView style={s.root} edges={["top", "left", "right", "bottom"]}>
       {!journey && !tutorial && (
@@ -87,6 +100,13 @@ function AppContent() {
               >
                 <Text style={s.navText}>{t("journal")}</Text>
               </Pressable>
+              <Pressable
+                accessibilityRole="button"
+                onPress={() => setPanel("competition")}
+                style={s.navLink}
+              >
+                <Text style={s.navText}>{t("competition")}</Text>
+              </Pressable>
             </View>
           )}
           <View style={s.headerActions}>
@@ -101,6 +121,11 @@ function AppContent() {
                     onPress={() => setPanel("records")}
                   />
                 )}
+                <IconButton
+                  name="spark"
+                  label={t("competition")}
+                  onPress={() => setPanel("competition")}
+                />
                 <IconButton
                   name="settings"
                   label={t("settings")}
@@ -179,6 +204,9 @@ function AppContent() {
         progress={progress}
         onClose={() => setPanel(null)}
         onTutorial={startTutorial}
+        onCreatePlayer={createPlayerAccount}
+        onSelectPlayer={switchPlayer}
+        onRenamePlayer={updatePlayerNickname}
       />
       {achievements && <AchievementsPanel progress={progress} profile={progress.profile} onClose={() => setAchievements(false)} />}
     </SafeAreaView>

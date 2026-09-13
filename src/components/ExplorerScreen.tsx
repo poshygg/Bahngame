@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import {
   Pressable,
   ScrollView,
@@ -18,7 +18,7 @@ import Svg, {
 import { COUNTRIES, getCountry, getCountryStages } from "../data/countries";
 import type { Stage } from "../data/stages";
 import { stageRules } from "../game/engine";
-import { Progress, recordKey } from "../game/progress";
+import { Progress, isStageUnlocked, recordKey } from "../game/progress";
 import { useI18n } from "../i18n";
 import { C, F } from "../theme";
 import { RouteMap } from "./RouteMap";
@@ -55,7 +55,7 @@ export function ExplorerScreen({
   const tablet = width < 1080;
   const { t, l, n, locale } = useI18n();
   const [showCustomBuilder, setShowCustomBuilder] = useState(false);
-  const scroll = useRef<ScrollView>(null);
+  const [quickLaunchOpen, setQuickLaunchOpen] = useState(true);
   const country = getCountry(progress.countryId);
   const stages = getCountryStages(country.id);
   const stage = stages[selected] ?? stages[0];
@@ -64,11 +64,7 @@ export function ExplorerScreen({
     (item) => progress.records[recordKey(item.id, progress.profile)]?.stars,
   ).length;
   return (
-    <ScrollView
-      ref={scroll}
-      testID="home-screen"
-      contentContainerStyle={s.scroll}
-    >
+    <ScrollView testID="home-screen" contentContainerStyle={s.scroll}>
       <View style={[s.container, mobile && s.mobileContainer]}>
         <View style={[s.hero, mobile && s.mobileHero]}>
           <View style={{ flex: 1, zIndex: 1 }}>
@@ -83,17 +79,104 @@ export function ExplorerScreen({
             </Text>
             <Pressable
               accessibilityRole="button"
-              onPress={() =>
-                scroll.current?.scrollTo({
-                  y: mobile ? 280 : 260,
-                  animated: true,
-                })
-              }
+              onPress={() => setQuickLaunchOpen((value) => !value)}
               style={s.heroLink}
             >
-              <Text style={s.heroLinkText}>{t("heroLink")}</Text>
+              <Text style={s.heroLinkText}>
+                {quickLaunchOpen ? t("quickLaunchClose") : t("quickLaunchOpen")}
+              </Text>
               <Icon name="arrow" color={C.paper} size={17} />
             </Pressable>
+            {quickLaunchOpen && (
+              <View style={s.quickLaunchCard}>
+                <Eyebrow>{t("routeLauncher")}</Eyebrow>
+                <View style={s.quickCountries}>
+                  {COUNTRIES.map((item) => (
+                    <Pressable
+                      key={item.id}
+                      testID={`quick-country-${item.id}`}
+                      accessibilityRole="button"
+                      accessibilityLabel={l(item.name)}
+                      aria-pressed={item.id === country.id}
+                      onPress={() => onCountry(item.id)}
+                      style={[
+                        s.quickCountry,
+                        item.id === country.id && s.quickCountryActive,
+                        item.status === "planned" && s.quickCountryPlanned,
+                      ]}
+                    >
+                      <Text
+                        style={[
+                          s.quickCountryText,
+                          item.id === country.id && s.quickCountryActiveText,
+                        ]}
+                      >
+                        {l(item.name)}
+                      </Text>
+                    </Pressable>
+                  ))}
+                </View>
+                <ScrollView
+                  horizontal
+                  showsHorizontalScrollIndicator={false}
+                  contentContainerStyle={s.quickRoutes}
+                >
+                  {stages.map((candidate, index) => {
+                    const unlocked = isStageUnlocked(
+                      progress,
+                      candidate,
+                      progress.profile,
+                    );
+                    return (
+                      <Pressable
+                        key={candidate.id}
+                        accessibilityRole="button"
+                        accessibilityLabel={`${candidate.city} ${candidate.line}`}
+                        disabled={!unlocked}
+                        aria-pressed={index === selected}
+                        onPress={() => onSelect(index)}
+                        style={[
+                          s.quickRoute,
+                          index === selected && s.quickRouteActive,
+                          !unlocked && s.quickRouteLocked,
+                        ]}
+                      >
+                        <Text
+                          style={[
+                            s.quickRouteName,
+                            index === selected && s.quickRouteActiveText,
+                            !unlocked && s.quickRouteDisabled,
+                          ]}
+                        >
+                          {l(candidate.areaName ?? candidate.city)}
+                        </Text>
+                        <Text
+                          style={[
+                            s.quickRouteMeta,
+                            index === selected && { color: C.primary },
+                          ]}
+                        >
+                          {candidate.line}
+                        </Text>
+                        {!unlocked && (
+                          <Text style={s.quickRouteLockedText}>
+                            {t("locked")}
+                          </Text>
+                        )}
+                      </Pressable>
+                    );
+                  })}
+                </ScrollView>
+                {stage && (
+                  <Button
+                    testID="hero-start"
+                    title={t("start")}
+                    onPress={() => onStart(stage)}
+                    style={s.quickStartButton}
+                  />
+                )}
+              </View>
+            )}
           </View>
           {!mobile && (
             <View style={{ width: tablet ? 300 : 390, height: 244 }}>
@@ -566,6 +649,69 @@ const s = StyleSheet.create({
     minHeight: 30,
   },
   heroLinkText: { fontFamily: F.medium, fontSize: 12, color: C.paper },
+  quickLaunchCard: {
+    marginTop: 16,
+    backgroundColor: C.paper,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: C.line,
+    padding: 16,
+    gap: 12,
+  },
+  quickCountries: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 8,
+  },
+  quickCountry: {
+    minHeight: 32,
+    paddingHorizontal: 12,
+    justifyContent: "center",
+    borderRadius: 7,
+    borderWidth: 1,
+    borderColor: C.line,
+    backgroundColor: C.paper,
+  },
+  quickCountryActive: { borderColor: C.primary, backgroundColor: "#F4F9FE" },
+  quickCountryActiveText: { color: C.primary },
+  quickCountryText: {
+    color: C.ink,
+    fontFamily: F.medium,
+    fontSize: 12,
+  },
+  quickCountryPlanned: { opacity: 0.66 },
+  quickRoutes: { gap: 8, paddingVertical: 2 },
+  quickRoute: {
+    minWidth: 150,
+    padding: 10,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: C.line,
+    backgroundColor: C.paper,
+    gap: 4,
+  },
+  quickRouteActive: {
+    borderColor: C.primary,
+    backgroundColor: "#F2F8FE",
+  },
+  quickRouteLocked: { opacity: 0.5 },
+  quickRouteName: {
+    fontFamily: F.medium,
+    fontSize: 13,
+    color: C.ink,
+  },
+  quickRouteActiveText: { color: C.primary },
+  quickRouteMeta: {
+    fontFamily: F.medium,
+    fontSize: 10,
+    color: C.muted,
+  },
+  quickRouteLockedText: {
+    fontFamily: F.medium,
+    fontSize: 10,
+    color: C.danger,
+  },
+  quickStartButton: { minHeight: 44 },
   mobileSticker: {
     position: "absolute",
     right: 21,

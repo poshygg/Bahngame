@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import {
   Modal,
   Pressable,
+  TextInput,
   ScrollView,
   StyleSheet,
   Text,
@@ -11,17 +12,26 @@ import { Button, Eyebrow, IconButton, Stars } from "../../components/ui";
 import { LanguageSwitch } from "../../components/LanguageSwitch";
 import { CountryFlag } from "../../components/ExplorerScreen";
 import { getCountry, getCountryStages } from "../../data/countries";
-import { type Progress, recordKey, routeSignature } from "../../game/progress";
+import {
+  playerTerritoryClaimCount,
+  type PlayerProfile,
+  type Progress,
+  recordKey,
+  routeSignature,
+} from "../../game/progress";
 import { useI18n } from "../../i18n";
 import { C, F } from "../../theme";
 import { AdPreferences } from "../ads/AdPreferences";
 
-export type Panel = "help" | "records" | "settings" | null;
+export type Panel = "help" | "records" | "settings" | "competition" | null;
 type Props = {
   panel: Panel;
   progress: Progress;
   onClose: () => void;
   onTutorial: () => void;
+  onCreatePlayer: (nickname: string) => void;
+  onSelectPlayer: (playerId: string) => void;
+  onRenamePlayer: (playerId: string, nickname: string) => void;
 };
 
 export function JourneyPanel(props: Props) {
@@ -35,9 +45,56 @@ export function JourneyPanel(props: Props) {
   );
 }
 
-function OpenJourneyPanel({ panel, progress, onClose, onTutorial }: Props) {
-  const { t, l } = useI18n();
+function OpenJourneyPanel({
+  panel,
+  progress,
+  onClose,
+  onTutorial,
+  onCreatePlayer,
+  onSelectPlayer,
+  onRenamePlayer,
+}: Props) {
+  const { t, l, n } = useI18n();
   const country = getCountry(progress.countryId);
+  const [newPlayerName, setNewPlayerName] = useState("");
+  const [renamingPlayerId, setRenamingPlayerId] = useState<string | null>(null);
+  const [renamingText, setRenamingText] = useState("");
+  const maxPlayers = 20;
+  const activePlayerId = progress.activePlayerId;
+  const sortedPlayers: PlayerProfile[] = useMemo(
+    () =>
+      [...progress.players].sort((a, b) => {
+        if (b.totalScore !== a.totalScore)
+          return b.totalScore - a.totalScore;
+        return b.lastSeenAt.localeCompare(a.lastSeenAt);
+      }),
+    [progress.players],
+  );
+  const onCreateRequest = () => {
+    const clean = newPlayerName.trim();
+    if (!clean) return;
+    if (progress.players.length >= maxPlayers) return;
+    onCreatePlayer(clean);
+    setNewPlayerName("");
+  };
+  const onRenameStart = (playerId: string, nickname: string) => {
+    setRenamingPlayerId(playerId);
+    setRenamingText(nickname);
+  };
+  const onRenameRequest = () => {
+    const clean = renamingText.trim();
+    if (!renamingPlayerId || !clean) return;
+    onRenamePlayer(renamingPlayerId, clean);
+    setRenamingPlayerId(null);
+    setRenamingText("");
+  };
+
+  const activePlayer = progress.players.find(
+    (player) => player.id === activePlayerId,
+  );
+  const activePlayerClaim = activePlayer
+    ? playerTerritoryClaimCount(progress, activePlayer.id)
+    : 0;
   return (
     <Modal
       visible={panel !== null}
@@ -54,6 +111,8 @@ function OpenJourneyPanel({ panel, progress, onClose, onTutorial }: Props) {
                   ? "helpTag"
                   : panel === "settings"
                     ? "settingsTag"
+                    : panel === "competition"
+                      ? "competitionTag"
                     : "journalTag",
               )}
             </Eyebrow>
@@ -66,6 +125,8 @@ function OpenJourneyPanel({ panel, progress, onClose, onTutorial }: Props) {
                   ? "helpTitle"
                   : panel === "settings"
                     ? "settings"
+                    : panel === "competition"
+                      ? "competition"
                     : "journal",
               )}
             </Text>
@@ -75,6 +136,8 @@ function OpenJourneyPanel({ panel, progress, onClose, onTutorial }: Props) {
                   ? "helpIntro"
                   : panel === "settings"
                     ? "settingsIntro"
+                    : panel === "competition"
+                      ? "competitionIntro"
                     : "journalIntro",
               )}
             </Text>
@@ -126,12 +189,161 @@ function OpenJourneyPanel({ panel, progress, onClose, onTutorial }: Props) {
                   <Text style={s.label}>{t("fairTitle")}</Text>
                   <Text style={s.body}>{t("fairBody")}</Text>
                 </View>
-                <View style={s.section}>
-                  <Text style={s.label}>{t("scoringTitle")}</Text>
-                  <Text style={s.body}>{t("scoringBody")}</Text>
-                  <Text style={s.body}>{t("spellingBody")}</Text>
-                </View>
                 <Text style={s.body}>{t("mapDisclaimer")}</Text>
+              </>
+            ) : panel === "competition" ? (
+              <>
+                <View style={s.section}>
+                  <Text style={s.label}>{t("activePlayer")}</Text>
+                  <View style={s.competitionActiveCard}>
+                    <View style={{ flex: 1 }}>
+                      <Text style={s.label}>
+                        {activePlayer?.nickname ?? t("noRecord")}
+                      </Text>
+                      <Text style={s.body}>
+                        {t("points", {
+                          count: n(activePlayer?.totalScore ?? 0),
+                        })}{" "}
+                        · {t("claimedTerritories", {
+                          count: activePlayerClaim,
+                        })}
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+                <View style={s.section}>
+                  <Text style={s.label}>{t("createPlayer")}</Text>
+                  <Text style={s.body}>{t("createPlayerHint")}</Text>
+                  <View style={s.playerCreateRow}>
+                    <TextInput
+                      value={newPlayerName}
+                      onChangeText={setNewPlayerName}
+                      placeholder={t("playerName")}
+                      placeholderTextColor={C.faint}
+                      style={s.playerInput}
+                      maxLength={20}
+                    />
+                    <Button
+                      title={t("save")}
+                      disabled={
+                        !newPlayerName.trim() ||
+                        progress.players.length >= maxPlayers
+                      }
+                      onPress={onCreateRequest}
+                      secondary
+                    />
+                  </View>
+                  <Text style={s.playerHint}>
+                    {t("competitionLimit", { max: maxPlayers })}
+                  </Text>
+                </View>
+                <View style={s.section}>
+                  <Text style={s.label}>
+                    {t("players", { count: progress.players.length })}
+                  </Text>
+                  <Text style={s.body}>{t("joinCompetition")}</Text>
+                  {sortedPlayers.map((player) => {
+                    const isActive = player.id === activePlayerId;
+                    const claimCount = playerTerritoryClaimCount(
+                      progress,
+                      player.id,
+                    );
+                    const isRenaming = renamingPlayerId === player.id;
+                    return (
+                      <View
+                        key={player.id}
+                        style={[s.rankCard, isActive && s.rankCardActive]}
+                      >
+                        <Pressable
+                          accessibilityRole="button"
+                          onPress={() => {
+                            if (renamingPlayerId) {
+                              setRenamingPlayerId(null);
+                              setRenamingText("");
+                            }
+                            onSelectPlayer(player.id);
+                          }}
+                          style={({ pressed }) => [
+                            s.rankTouchable,
+                            pressed && { opacity: 0.85 },
+                          ]}
+                        >
+                          <View style={{ flex: 1, minWidth: 0 }}>
+                            <Text style={s.label}>{player.nickname}</Text>
+                            <Text style={s.body}>
+                              {t("points", { count: n(player.totalScore) })}{" "}
+                              · {t("claimedTerritories", { count: claimCount })}
+                            </Text>
+                          </View>
+                          <Text style={s.rankActionText}>
+                            {isActive ? t("activePlayer") : t("joinCompetition")}
+                          </Text>
+                        </Pressable>
+                        <View style={s.rankRenameRow}>
+                          {isRenaming ? (
+                            <TextInput
+                              value={renamingText}
+                              autoFocus
+                              onChangeText={setRenamingText}
+                              placeholder={t("playerName")}
+                              placeholderTextColor={C.faint}
+                              style={s.rankRenameInput}
+                              onSubmitEditing={onRenameRequest}
+                              onBlur={() => {
+                                setRenamingPlayerId(null);
+                                setRenamingText("");
+                              }}
+                              maxLength={20}
+                            />
+                          ) : (
+                            <Pressable
+                              accessibilityRole="button"
+                              onPress={() =>
+                                onRenameStart(player.id, player.nickname)
+                              }
+                              style={s.rankRenameButton}
+                            >
+                              <Text style={s.rankRenameText}>
+                                {t("rename")}
+                              </Text>
+                            </Pressable>
+                          )}
+                          {isRenaming && (
+                            <>
+                              <Pressable
+                                accessibilityRole="button"
+                                onPress={() => {
+                                  setRenamingPlayerId(null);
+                                  setRenamingText("");
+                                }}
+                                style={s.rankCancelButton}
+                              >
+                                <Text style={s.rankRenameText}>
+                                  {t("cancel")}
+                                </Text>
+                              </Pressable>
+                              <Pressable
+                                accessibilityRole="button"
+                                onPress={() => {
+                                  if (renamingText.trim()) onRenameRequest();
+                                  else {
+                                    setRenamingPlayerId(null);
+                                    setRenamingText("");
+                                  }
+                                }}
+                                style={s.rankRenameDone}
+                              >
+                                <Text style={s.rankRenameText}>
+                                  {t("save")}
+                                </Text>
+                              </Pressable>
+                            </>
+                          )}
+                        </View>
+                      </View>
+                    );
+                  })}
+                </View>
               </>
             ) : (
               <>
@@ -423,4 +635,83 @@ const s = StyleSheet.create({
   },
   pageText: { fontFamily: F.medium, fontSize: 12, color: C.ink },
   disabled: { opacity: 0.35 },
+  competitionActiveCard: {
+    borderWidth: 1,
+    borderColor: C.line,
+    borderRadius: 12,
+    backgroundColor: "#F8FAFD",
+    padding: 16,
+    gap: 6,
+  },
+  playerCreateRow: { marginTop: 10, gap: 10 },
+  playerInput: {
+    borderWidth: 1,
+    borderColor: C.line,
+    borderRadius: 10,
+    minHeight: 44,
+    paddingHorizontal: 12,
+    fontFamily: F.regular,
+    color: C.ink,
+    fontSize: 14,
+    backgroundColor: C.paper,
+  },
+  playerHint: {
+    fontFamily: F.regular,
+    fontSize: 11,
+    marginTop: 8,
+    color: C.muted,
+  },
+  rankCard: {
+    marginTop: 12,
+    borderWidth: 1,
+    borderColor: C.line,
+    borderRadius: 12,
+    overflow: "hidden",
+    backgroundColor: C.paper,
+  },
+  rankCardActive: {
+    borderColor: C.primary,
+    backgroundColor: "#F4F9FE",
+  },
+  rankTouchable: {
+    minHeight: 56,
+    padding: 12,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+  },
+  rankActionText: {
+    fontFamily: F.medium,
+    fontSize: 11,
+    color: C.primary,
+  },
+  rankRenameRow: {
+    borderTopWidth: 1,
+    borderTopColor: C.line,
+    padding: 10,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+    flexWrap: "wrap",
+  },
+  rankRenameButton: { minHeight: 28, justifyContent: "center" },
+  rankCancelButton: { minHeight: 28, justifyContent: "center" },
+  rankRenameDone: { minHeight: 28, justifyContent: "center" },
+  rankRenameText: {
+    fontFamily: F.medium,
+    fontSize: 11,
+    color: C.primary,
+  },
+  rankRenameInput: {
+    borderWidth: 1,
+    borderColor: C.line,
+    borderRadius: 8,
+    minHeight: 32,
+    paddingHorizontal: 10,
+    fontFamily: F.regular,
+    fontSize: 12,
+    color: C.ink,
+    flex: 1,
+    backgroundColor: C.paper,
+  },
 });

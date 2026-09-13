@@ -12,6 +12,7 @@ import {
   grandTourRoute,
 } from "./packs/germany";
 export type InputProfile = "keyboard" | "touch";
+export type GameMode = "train" | "walk" | "territory";
 
 export type Stage = {
   id: string;
@@ -46,6 +47,11 @@ export type Stage = {
   networkId?: string;
   campaignOrigin?: string;
   campaignDestination?: string;
+  gameMode?: GameMode;
+  /** Optional walk/competitive variant config */
+  territoryTargetLaps?: number;
+  /** Optional stage-specific timing multiplier (used for walk and territory variants). */
+  timeMultiplier?: number;
 };
 
 // Add a new content pack here; game rules and renderers do not contain city data.
@@ -218,7 +224,59 @@ const introRegions: Record<
     serviceKind: "rail",
   },
 };
-export const STAGES: Stage[] = [
+const createWalkStage = (stage: Stage): Stage => {
+  const campaignId = stage.campaignId
+    ? `${stage.campaignId}.walk`
+    : `${stage.id}.walk`;
+  return {
+    ...stage,
+    id: `${stage.id}.walk`,
+    gameMode: "walk",
+    campaignId,
+    line: `W-${stage.line}`,
+    title: {
+      en: `Walking · ${stage.title.en}`,
+      de: `Zu Fuß · ${stage.title.de}`,
+    },
+    subtitle: {
+      en: stage.subtitle.en
+        ? `${stage.subtitle.en} (Walking challenge)`
+        : "Walk the same route without rail transport.",
+      de: stage.subtitle.de
+        ? `${stage.subtitle.de} (Fußweg-Challenge)`
+        : "Schreite dieselbe Strecke zu Fuß zurück.",
+    },
+    targetCps: Math.max(1.4, stage.targetCps * 0.65),
+    timeMultiplier: 1.45,
+  };
+};
+
+const createTerritoryStage = (stage: Stage): Stage => {
+  const campaignId = stage.campaignId
+    ? `${stage.campaignId}.territory`
+    : `${stage.id}.territory`;
+  return {
+    ...stage,
+    id: `${stage.id}.territory`,
+    gameMode: "territory",
+    campaignId,
+    line: `T-${stage.line}`,
+    title: {
+      en: `Territory · ${stage.title.en}`,
+      de: `Beutegebiet · ${stage.title.de}`,
+    },
+    subtitle: {
+      en: "Capture the loop by returning to the start before the timer ends.",
+      de: "Erobere das Gebiet, indem du den Loop vor Ablauf der Zeit wieder erreichst.",
+    },
+    targetCps: stage.targetCps,
+    timeMultiplier: 1.85,
+    territoryTargetLaps: 1,
+    campaignId,
+  };
+};
+
+const BASE_STAGES: Stage[] = [
   ...INTRO_STAGES.map((stage): Stage => {
     const region = introRegions[stage.id];
     const network = CITY_NETWORKS.find((entry) =>
@@ -235,4 +293,10 @@ export const STAGES: Stage[] = [
     };
   }),
   ...createGermanCampaignStages(RAIL_CATALOG),
+];
+
+export const STAGES: Stage[] = [
+  ...BASE_STAGES,
+  ...BASE_STAGES.filter((stage) => !stage.isCustom).map(createWalkStage),
+  ...BASE_STAGES.filter((stage) => !stage.isCustom).map(createTerritoryStage),
 ];

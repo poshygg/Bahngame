@@ -15,6 +15,12 @@ export const ORIGINAL_CHARACTER_POINTS = 20;
 export const typingTargets = (stage: Stage): string[] =>
   [stage.origin, ...stage.stations].filter((name) => name.length > 0);
 
+const isTerritoryMode = (stage: Stage) => stage.gameMode === "territory";
+
+function effectiveTargetCps(stage: Stage) {
+  return stage.targetCps * (stage.timeMultiplier ?? 1);
+}
+
 export const currentStation = (stage: Stage, run: Run): string =>
   run.originCompleted ? (stage.stations[run.stationIndex] ?? "") : stage.origin;
 
@@ -27,11 +33,15 @@ export function stageRules(stage: Stage, profile: InputProfile) {
     (sum, station) => sum + originalCharacterCount(station),
     0,
   );
-  const targetCps = stage.targetCps * (profile === "touch" ? 0.5 : 1);
+  const targetCps =
+    effectiveTargetCps(stage) * (profile === "touch" ? 0.5 : 1);
+  const territoryMultiplier = isTerritoryMode(stage) ? 1.3 : 1;
   const seconds = Math.ceil(
-    (totalChars / targetCps) * 2.2 + (profile === "touch" ? 18 : 12),
+    (totalChars / targetCps) * 2.2 * territoryMultiplier +
+      (profile === "touch" ? 18 : 12),
   );
-  const baseMaxScore = totalChars * CHARACTER_POINTS;
+  const lapBonus = Math.max(1, stage.territoryTargetLaps ?? 1);
+  const baseMaxScore = totalChars * CHARACTER_POINTS * lapBonus;
   return {
     totalChars,
     targetCps,
@@ -55,6 +65,8 @@ export type Run = {
   cursor: number;
   correct: number;
   originalCharacters: number;
+  /** Territory mode lap counter. Standard modes keep this at zero. */
+  lapsCompleted: number;
   mistakes: number;
   combo: number;
   maxCombo: number;
@@ -72,6 +84,7 @@ export function createRun(stage: Stage, profile: InputProfile): Run {
     cursor: 0,
     correct: 0,
     originalCharacters: 0,
+    lapsCompleted: 0,
     mistakes: 0,
     combo: 0,
     maxCombo: 0,
@@ -99,11 +112,33 @@ export function typeCharacter(run: Run, stage: Stage, character: string): Run {
 
   const cursor = run.cursor + match.length;
   const complete = cursor === inputTarget(station).length;
+  const lapsBefore = run.lapsCompleted;
+  const reachedFinalDestination =
+    complete &&
+    run.originCompleted &&
+    run.stationIndex === stage.stations.length - 1;
+
+  if (isTerritoryMode(stage) && reachedFinalDestination) {
+    const territoryLaps = lapsBefore + 1;
+    return {
+      ...run,
+      cursor: 0,
+      stationIndex: 0,
+      originCompleted: false,
+      correct: run.correct + match.length,
+      lapsCompleted: territoryLaps,
+      originalCharacters: run.originalCharacters + Number(match.original),
+      combo: run.combo + match.length,
+      maxCombo: Math.max(run.maxCombo, run.combo + match.length),
+    };
+  }
+
   const arrived =
     complete &&
     (run.originCompleted
       ? run.stationIndex === stage.stations.length - 1
       : stage.stations.length === 0);
+
   return {
     ...run,
     cursor: complete ? 0 : cursor,
@@ -113,6 +148,7 @@ export function typeCharacter(run: Run, stage: Stage, character: string): Run {
     correct: run.correct + match.length,
     originalCharacters: run.originalCharacters + Number(match.original),
     combo: run.combo + match.length,
+    lapsCompleted: run.lapsCompleted,
     maxCombo: Math.max(run.maxCombo, run.combo + match.length),
     status: arrived ? "finished" : "playing",
     ...(arrived ? { finishReason: "arrived" as const } : {}),
@@ -131,11 +167,24 @@ export function runStats(run: Run, stage: Stage) {
     run.originalCharacters * ORIGINAL_CHARACTER_POINTS * qualityFactor,
   );
   const score = baseScore + originalBonus;
-  const arrived = run.finishReason === "arrived";
-  const stars = arrived
+  const lapGoal = stage.territoryTargetLaps ?? 1;
+  const completedGoal = isTerritoryMode(stage)
+    ? run.lapsCompleted >= lapGoal
+    : run.finishReason === "arrived";
+  const stars = completedGoal
     ? rules.thresholds.filter((threshold) => score >= threshold).length
     : 0;
-  const progress = rules.totalChars ? run.correct / rules.totalChars : 0;
+
+  const progress =
+    rules.totalChars && stage.gameMode === "territory"
+      ? Math.min(
+          1,
+          (run.correct - rules.totalChars * run.lapsCompleted) / rules.totalChars,
+        )
+      : rules.totalChars
+        ? run.correct / rules.totalChars
+        : 0;
+
   return {
     ...rules,
     accuracy,
@@ -146,7 +195,8 @@ export function runStats(run: Run, stage: Stage) {
     score,
     stars,
     progress,
-    passed: arrived && stars > 0,
+    passed: completedGoal && stars >= 1,
+    lapsCompleted: run.lapsCompleted,
   };
 }
 
