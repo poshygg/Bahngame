@@ -1,0 +1,13 @@
+# City networks and state journeys
+
+Version 0.5 separates campaign selection from the full railway routing database.
+
+- `src/data/germany-campaigns.ts` contains twelve editorial metropolitan collections. Several nearby cities share one network label, such as Rhine-Ruhr and Leipzig/Halle. This is a discovery grouping, not a statement about municipal boundaries or railway ownership.
+- Existing source-tagged S/U services are assigned to the collection containing the most mapped discovery-bucket stops. Cologne S-Bahn services are explicitly kept with Cologne rather than absorbed into the larger Rhine-Ruhr collection. Bremen's real RS references and the selected numbered Stadtbahn services in Cologne/Hanover retain their public numbers; they are not renamed to invented U-Bahn numbers.
+- `src/data/state-corridors.ts` contains twenty-seven reviewed RE/RB corridors across thirteen territorial states. Each entry references an existing directed source line and explicit origin/destination station IDs. Its short label names the actual towns; `cityId`, which is only a 16 km discovery bucket, is never used to prove that endpoints are different municipalities.
+- `stateCorridorLine` accepts only the inclusive consecutive source slice with all stops assigned to the chosen state. A missing stop, unknown state, reversed endpoint order or out-of-state intermediate stop invalidates the corridor. No filtering across gaps, nearest-station connections or timetable inference occurs.
+- Berlin, Hamburg and Bremen use city-network collections. ICE/IC/EC variants remain in the long-distance collection. Lesser-used local routes remain available in the unchanged personal routing graph.
+
+`germanCampaignStages.ts` composes the three collections through the shared chapter generator. Chapters keep up to eight destinations, share their boundary station, and unlock the following chapter of the same campaign. City/long-distance stage IDs and scoring signatures remain unchanged. State corridors use new identities because their routes may differ from the earlier full service. `parseProgress` archives retired records under their original keys across repeated reloads without remapping their scores or granting new unlocks.
+
+To change the selection, edit the network list or corridor specifications and run `npm test` and `npm run typecheck`. The curation tests verify all twelve metropolitan entries, all thirteen territorial states, source-slice reconstruction, rejected cross-border slices, retained scoring identities, and continued custom access to local lines. Rebuild all platform exports before packaging Windows. Data provenance and licences remain in [the catalog documentation](germany-rail-catalog.md).

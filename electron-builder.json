@@ -1,0 +1,20 @@
+{
+  "appId": "com.bahnreise.desktop",
+  "productName": "Bahnreise",
+  "directories": { "app": "desktop", "output": "release" },
+  "files": [
+    "main.cjs",
+    "package.json",
+    "!node_modules/**/*",
+    "!**/node_modules/**/*"
+  ],
+  "extraResources": [{ "from": "dist", "to": "web" }],
+  "asar": true,
+  "npmRebuild": false,
+  "win": {
+    "target": ["portable"],
+    "icon": "assets/bahnreise-icon.png",
+    "signAndEditExecutable": false
+  },
+  "portable": { "artifactName": "Bahnreise-Windows-${version}.exe" }
+}

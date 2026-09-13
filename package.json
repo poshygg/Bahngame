@@ -1,0 +1,51 @@
+{
+  "name": "bahnreise",
+  "version": "0.5.0",
+  "main": "index.ts",
+  "dependencies": {
+    "@expo-google-fonts/inter": "^0.4.2",
+    "@expo/metro-runtime": "~57.0.15",
+    "@mapbox/vector-tile": "^3.0.0",
+    "@react-native-async-storage/async-storage": "2.2.0",
+    "expo": "~57.0.22",
+    "expo-constants": "~57.0.18",
+    "expo-font": "~57.0.4",
+    "expo-status-bar": "~57.0.1",
+    "pbf": "^5.1.2",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "react-native": "0.86.3",
+    "react-native-google-mobile-ads": "^16.5.0",
+    "react-native-safe-area-context": "~5.7.0",
+    "react-native-svg": "15.15.4",
+    "react-native-web": "^0.21.2"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@types/react": "~19.2.2",
+    "electron": "^44.3.0",
+    "electron-builder": "^26.15.3",
+    "prettier": "^3.9.6",
+    "qrcode": "^1.5.4",
+    "sharp": "^0.35.4",
+    "tsx": "^4.23.13",
+    "typescript": "~6.0.3"
+  },
+  "scripts": {
+    "start": "expo start --lan",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test tests/*.test.ts",
+    "test:e2e": "playwright test",
+    "build:web": "expo export --platform web && node scripts/export-rail-data.cjs",
+    "build:all": "expo export --platform all && node scripts/export-rail-data.cjs",
+    "preview": "node scripts/serve.cjs",
+    "desktop": "electron desktop/main.cjs",
+    "build:windows": "npm run build:web && node scripts/package-windows.cjs"
+  },
+  "private": true,
+  "description": "A European railway typing adventure for mobile, desktop, and web.",
+  "author": "Bahnreise"
+}

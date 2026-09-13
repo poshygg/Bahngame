@@ -1,0 +1,2116 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-09-12T18:31:35Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "node",
+  "id": 24691504,
+  "lat": 50.8372915,
+  "lon": 14.2233061,
+  "tags": {
+    "public_transport": "stop_position",
+    "railway": "stop",
+    "request_stop": "yes",
+    "train": "yes",
+    "wikidata": "Q25402491"
+  }
+},
+{
+  "type": "node",
+  "id": 24692835,
+  "lat": 50.8170446,
+  "lon": 14.2214611,
+  "tags": {
+    "public_transport": "stop_position",
+    "railway": "stop",
+    "request_stop": "yes",
+    "train": "yes",
+    "wikidata": "Q25402468"
+  }
+},
+{
+  "type": "node",
+  "id": 439750255,
+  "lat": 50.9845998,
+  "lon": 14.3364384,
+  "tags": {
+    "public_transport": "stop_position",
+    "railway": "stop",
+    "train": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 980410464,
+  "lat": 51.0067676,
+  "lon": 14.4354320,
+  "tags": {
+    "public_transport": "stop_position",
+    "railway": "stop",
+    "request_stop": "yes",
+    "train": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 980410489,
+  "lat": 51.0047415,
+  "lon": 14.3939699,
+  "tags": {
+    "public_transport": "stop_position",
+    "railway": "stop",
+    "request_stop": "yes",
+    "train": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 980410503,
+  "lat": 50.9812569,
+  "lon": 14.5069769,
+  "tags": {
+    "public_transport": "stop_position",
+    "railway": "stop",
+    "request_stop": "yes",
+    "train": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 980428522,
+  "lat": 50.9946412,
+  "lon": 14.3581356,
+  "tags": {
+    "public_transport": "stop_position",
+    "railway": "stop",
+    "request_stop": "yes",
+    "train": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 2834047272,
+  "lat": 50.9923607,
+  "lon": 14.3209520,
+  "tags": {
+    "public_transport": "stop_position",
+    "railway": "stop",
+    "request_stop": "yes",
+    "train": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 5680209208,
+  "lat": 51.0062739,
+  "lon": 14.4619605,
+  "tags": {
+    "public_transport": "stop_position",
+    "railway": "stop",
+    "train": "yes",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "node",
+  "id": 13429931167,
+  "lat": 50.9931440,
+  "lon": 14.3794049,
+  "tags": {
+    "public_transport": "stop_position",
+    "railway": "stop",
+    "train": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 35096219,
+  "center": {
+    "lat": 51.0453892,
+    "lon": 9.6645809
+  },
+  "nodes": [
+    1203059809,
+    5073360230,
+    411728150,
+    5073360233,
+    5073360231,
+    5073360232,
+    1203059809
+  ],
+  "tags": {
+    "area": "yes",
+    "bench": "yes",
+    "bin": "yes",
+    "lit": "yes",
+    "name": "2",
+    "public_transport": "platform",
+    "railway": "platform",
+    "ref": "2",
+    "shelter": "yes",
+    "tactile_paving": "yes",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 35096220,
+  "center": {
+    "lat": 51.0457190,
+    "lon": 9.6644146
+  },
+  "nodes": [
+    411728153,
+    5073360234,
+    5073360227,
+    411728154,
+    5073360252,
+    5130759416,
+    5130759419,
+    5073360228,
+    5130759922,
+    5130759923,
+    5073360235,
+    5130759928,
+    5130759927,
+    5073360251,
+    411728153
+  ],
+  "tags": {
+    "area": "yes",
+    "bench": "yes",
+    "bin": "yes",
+    "lit": "yes",
+    "name": "1",
+    "public_transport": "platform",
+    "railway": "platform",
+    "ref": "1",
+    "shelter": "yes",
+    "tactile_paving": "yes",
+    "train": "yes",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 142211680,
+  "center": {
+    "lat": 50.7612940,
+    "lon": 15.0452688
+  },
+  "nodes": [
+    1556413469,
+    1556413470,
+    12090284930,
+    1556413423,
+    10245460121,
+    12090284837,
+    12090284835,
+    12090284838,
+    10245460122,
+    1556413421,
+    12090284932,
+    12090284933,
+    1556413469
+  ],
+  "tags": {
+    "announcement": "yes",
+    "area": "yes",
+    "bench": "yes",
+    "bin": "yes",
+    "lit": "yes",
+    "local_ref": "5",
+    "name": "5",
+    "passenger_information_display": "yes",
+    "passenger_information_display:speech_output": "yes",
+    "public_transport": "platform",
+    "railway": "platform",
+    "ref": "107;111",
+    "shelter": "yes",
+    "surface": "paved",
+    "tactile_paving": "yes",
+    "train": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 170650972,
+  "center": {
+    "lat": 50.8374736,
+    "lon": 14.2230076
+  },
+  "nodes": [
+    1818092734,
+    1818092736
+  ],
+  "tags": {
+    "public_transport": "platform",
+    "railway": "platform",
+    "source": "bing, survey"
+  }
+},
+{
+  "type": "way",
+  "id": 207626010,
+  "center": {
+    "lat": 52.2360475,
+    "lon": 9.8583457
+  },
+  "nodes": [
+    2178762663,
+    2178762608,
+    2435832129,
+    6779532715,
+    2178762674,
+    2435832128,
+    2435832130,
+    2435832132,
+    2178762635,
+    2178762637,
+    3152591335,
+    2178762679,
+    2178762657,
+    2178762658,
+    2178762662,
+    6779532716,
+    6779532717,
+    2178762650,
+    2178762622,
+    3152591339,
+    2178762663
+  ],
+  "tags": {
+    "area": "yes",
+    "bench": "yes",
+    "bin": "yes",
+    "check_date:shelter": "2024-04-06",
+    "highway": "platform",
+    "lit": "yes",
+    "name": "Sarstedt",
+    "network": "Großraum-Verkehr Hannover",
+    "passenger_information_display": "no",
+    "public_transport": "platform",
+    "railway": "platform",
+    "ref_name": "Sarstedt (GVH-Endpunkt), Sarstedt",
+    "route_ref": "1;21;201;211;213",
+    "shelter": "yes",
+    "tactile_paving": "no",
+    "tram": "yes",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 207626015,
+  "center": {
+    "lat": 52.2359486,
+    "lon": 9.8580773
+  },
+  "nodes": [
+    2178762687,
+    2178762643,
+    6779532713,
+    6779532712,
+    2178762659,
+    2178762680,
+    2178762652,
+    2435832134,
+    2178762655,
+    3152591322,
+    2178762629,
+    2435832133,
+    2178762640,
+    2178762653,
+    2178762688,
+    2178762687
+  ],
+  "tags": {
+    "area": "yes",
+    "bench": "yes",
+    "bin": "yes",
+    "bus": "yes",
+    "check_date:shelter": "2024-04-06",
+    "highway": "platform",
+    "lit": "yes",
+    "name": "Sarstedt",
+    "network": "Großraum-Verkehr Hannover",
+    "public_transport": "platform",
+    "railway": "platform",
+    "ref_name": "Sarstedt (GVH-Endpunkt), Sarstedt",
+    "shelter": "yes",
+    "tactile_paving": "no",
+    "tram": "yes",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 295416335,
+  "center": {
+    "lat": 53.1583635,
+    "lon": 8.9449689
+  },
+  "nodes": [
+    10169608668,
+    10169608667,
+    10169608666,
+    10169608665,
+    10169608664,
+    10169608663,
+    10169608662,
+    10169608668
+  ],
+  "tags": {
+    "bench": "yes",
+    "bin": "yes",
+    "bus": "yes",
+    "covered": "yes",
+    "highway": "platform",
+    "lit": "yes",
+    "name": "Lilienthal",
+    "old_name": "Falkenberg",
+    "passenger_information_display": "yes",
+    "public_transport": "platform",
+    "railway": "platform",
+    "shelter": "yes",
+    "tactile_paving": "yes",
+    "tram": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 295416336,
+  "center": {
+    "lat": 53.1582699,
+    "lon": 8.9451481
+  },
+  "nodes": [
+    10169608681,
+    10169608680,
+    10169608679,
+    10169608678,
+    10169608677,
+    10169608676,
+    10169608675,
+    10169608674,
+    10169608673,
+    10169608672,
+    10169608671,
+    10169608670,
+    10169608669,
+    10169608682,
+    10169608681
+  ],
+  "tags": {
+    "bench": "yes",
+    "bin": "yes",
+    "bus": "yes",
+    "lit": "yes",
+    "name": "Lilienthal",
+    "passenger_information_display": "yes",
+    "public_transport": "platform",
+    "railway": "platform",
+    "shelter": "yes",
+    "tactile_paving": "yes",
+    "tram": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 393487775,
+  "center": {
+    "lat": 50.6594314,
+    "lon": 12.0113401
+  },
+  "nodes": [
+    3966777714,
+    6430056075,
+    6430056076,
+    6430056070,
+    6430056077,
+    3966777716,
+    3966777714
+  ],
+  "tags": {
+    "area": "yes",
+    "local_ref": "2",
+    "name": "2",
+    "operator": "DB InfraGO",
+    "public_transport": "platform",
+    "railway": "platform",
+    "ref": "2",
+    "train": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 416594502,
+  "center": {
+    "lat": 50.9847634,
+    "lon": 14.3362448
+  },
+  "nodes": [
+    4173442090,
+    9798449704,
+    9798449705,
+    4173442096,
+    9798449703,
+    4173442090
+  ],
+  "tags": {
+    "bench": "yes",
+    "bin": "yes",
+    "covered": "no",
+    "lit": "yes",
+    "public_transport": "platform",
+    "railway": "platform",
+    "ref": "1",
+    "shelter": "no",
+    "surface": "paving_stones",
+    "tactile_paving": "yes",
+    "train": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 441840219,
+  "center": {
+    "lat": 49.8611487,
+    "lon": 8.5661648
+  },
+  "nodes": [
+    4395380359,
+    14056717725,
+    4395380360,
+    4395380361,
+    14056717726,
+    4395380362,
+    14056717730,
+    14056717732,
+    14056717731,
+    14056717729,
+    4395380359
+  ],
+  "tags": {
+    "area": "yes",
+    "bench": "yes",
+    "bin": "yes",
+    "departures_board": "realtime",
+    "lit": "yes",
+    "name": "Wagenhalle",
+    "network": "RMV",
+    "operator": "HEAG",
+    "public_transport": "platform",
+    "railway": "platform",
+    "shelter": "yes",
+    "surface": "paving_stones",
+    "tactile_paving": "yes",
+    "tram": "yes",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 452246191,
+  "center": {
+    "lat": 49.4918179,
+    "lon": 10.6598849
+  },
+  "nodes": [
+    4490411424,
+    4490411418,
+    4490411421,
+    4490411420,
+    4490411422,
+    4490411413,
+    4490411419,
+    4490411423,
+    4490411417,
+    4490411424
+  ],
+  "tags": {
+    "area": "yes",
+    "bench": "yes",
+    "bin": "yes",
+    "description": "Markt Erlbach Bahnsteig 1 & 2",
+    "lit": "yes",
+    "name": "Markt Erlbach",
+    "public_transport": "platform",
+    "railway": "platform",
+    "ref": "1;2",
+    "ref:IFOPT": "de:09575:14600",
+    "shelter": "no",
+    "surface": "gravel;grass",
+    "tactile_paving": "no",
+    "train": "yes",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "way",
+  "id": 607016172,
+  "center": {
+    "lat": 50.8171671,
+    "lon": 14.2213793
+  },
+  "nodes": [
+    5753716897,
+    5753716905
+  ],
+  "tags": {
+    "public_transport": "platform",
+    "railway": "platform"
+  }
+},
+{
+  "type": "way",
+  "id": 731853748,
+  "center": {
+    "lat": 51.0068474,
+    "lon": 14.4606904
+  },
+  "nodes": [
+    6853348993,
+    6853348992,
+    7724852817,
+    9067851263,
+    6853348990,
+    6853348993
+  ],
+  "tags": {
+    "area": "yes",
+    "bench": "yes",
+    "bin": "yes",
+    "lit": "yes",
+    "public_transport": "platform",
+    "railway": "platform",
+    "ref": "2",
+    "shelter": "no",
+    "surface": "paving_stones",
+    "tactile_paving": "yes",
+    "train": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 731853752,
+  "center": {
+    "lat": 51.0067765,
+    "lon": 14.4352346
+  },
+  "nodes": [
+    6853349011,
+    6853349007,
+    6853349010,
+    6853349009,
+    6853349008,
+    6853349011
+  ],
+  "tags": {
+    "area": "yes",
+    "public_transport": "platform",
+    "railway": "platform",
+    "train": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 731853757,
+  "center": {
+    "lat": 51.0048987,
+    "lon": 14.3942614
+  },
+  "nodes": [
+    6853349059,
+    6853349058,
+    6853349057,
+    6853349056,
+    6853349055,
+    6853349054,
+    10246722783,
+    6853349053,
+    6853349066,
+    6853349065,
+    6853349064,
+    6853349063,
+    6853349062,
+    6853349061,
+    6853349060,
+    7278065742,
+    7278065741,
+    7278065740,
+    7278065739,
+    7278065738,
+    7278065737,
+    7278065736,
+    7278065735,
+    7278065734,
+    7278065733,
+    7278065732,
+    7278065731,
+    7278065730,
+    7278065729,
+    7278065728,
+    7278065727,
+    6853349059
+  ],
+  "tags": {
+    "public_transport": "platform",
+    "railway": "platform",
+    "train": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 731853759,
+  "center": {
+    "lat": 50.9930878,
+    "lon": 14.3791661
+  },
+  "nodes": [
+    6853349078,
+    6853349077,
+    7726171435,
+    6853349076,
+    6853349075,
+    6853349078
+  ],
+  "tags": {
+    "public_transport": "platform",
+    "railway": "platform",
+    "train": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 731853771,
+  "center": {
+    "lat": 50.9923431,
+    "lon": 14.3210100
+  },
+  "nodes": [
+    6853349159,
+    6853349158,
+    6853349157,
+    6853349156,
+    6853349155,
+    6853349154,
+    6853349153,
+    6853349152,
+    6853349151,
+    6853349150,
+    6853349149,
+    6853349148,
+    6853349147,
+    6853349146,
+    6853349145,
+    6853349159
+  ],
+  "tags": {
+    "area": "yes",
+    "public_transport": "platform",
+    "railway": "platform",
+    "train": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 839110668,
+  "center": {
+    "lat": 50.9812582,
+    "lon": 14.5071189
+  },
+  "nodes": [
+    7830362483,
+    7830362484
+  ],
+  "tags": {
+    "bench": "yes",
+    "bin": "yes",
+    "lit": "yes",
+    "public_transport": "platform",
+    "railway": "platform",
+    "shelter": "yes",
+    "tactile_paving": "no",
+    "train": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1110326147,
+  "center": {
+    "lat": 49.8614296,
+    "lon": 8.5661163
+  },
+  "nodes": [
+    10157460290,
+    14056759089,
+    10157460291,
+    10157460298,
+    10157460294,
+    14056759090,
+    310889011,
+    14056791607,
+    14056791609,
+    10157460288,
+    10157460297,
+    14056759088,
+    10157460290
+  ],
+  "tags": {
+    "bench": "no",
+    "bin": "yes",
+    "lit": "yes",
+    "name": "Griesheim Wagenhalle",
+    "public_transport": "platform",
+    "railway": "platform",
+    "shelter": "no",
+    "tactile_paving": "yes",
+    "tram": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1335027116,
+  "center": {
+    "lat": 50.9946741,
+    "lon": 14.3585802
+  },
+  "nodes": [
+    12350851628,
+    12350851629,
+    12350851638,
+    12350851630,
+    12350851631,
+    2834136727,
+    12350851637,
+    12350851628
+  ],
+  "tags": {
+    "area": "yes",
+    "operator": "Správa železnic",
+    "public_transport": "platform",
+    "railway": "platform",
+    "train": "yes"
+  }
+},
+{
+  "type": "way",
+  "id": 1456903290,
+  "center": {
+    "lat": 49.7073434,
+    "lon": 6.5505372
+  },
+  "nodes": [
+    3202790205,
+    7544147844,
+    7544147845
+  ],
+  "tags": {
+    "height": "0.76",
+    "railway": "platform_edge",
+    "ref": "204",
+    "ref:IFOPT": "de:07235:11155:2:204"
+  }
+},
+{
+  "type": "relation",
+  "id": 1617894,
+  "center": {
+    "lat": 49.4606122,
+    "lon": 10.8635696
+  },
+  "members": [
+    {
+      "type": "way",
+      "ref": 116915200,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 116915201,
+      "role": "outer"
+    }
+  ],
+  "tags": {
+    "bench": "yes",
+    "bin": "yes",
+    "covered": "no",
+    "height": "0.55",
+    "lit": "yes",
+    "name": "Cadolzburg",
+    "note": "Cadolzburg platforms",
+    "operator": "DB InfraGO AG",
+    "operator:wikidata": "Q122870674",
+    "public_transport": "platform",
+    "railway": "platform",
+    "ref": "2",
+    "ref:IFOPT": "de:09573:5100",
+    "source": "Bing;DOP_LVA_BY",
+    "surface": "asphalt",
+    "tactile_paving": "yes",
+    "train": "yes",
+    "type": "multipolygon",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "relation",
+  "id": 4162904,
+  "center": {
+    "lat": 51.3142842,
+    "lon": 12.3157643
+  },
+  "members": [
+    {
+      "type": "way",
+      "ref": 193701485,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 311027655,
+      "role": "outer"
+    }
+  ],
+  "tags": {
+    "announcement": "no",
+    "bench": "yes",
+    "bin": "yes",
+    "check_date:shelter": "2025-10-11",
+    "lit": "yes",
+    "name": "Kurt-Kresse-Straße",
+    "passenger_information_display": "no",
+    "public_transport": "platform",
+    "railway": "platform",
+    "shelter": "yes",
+    "surface": "paved",
+    "tactile_paving": "yes",
+    "type": "multipolygon"
+  }
+},
+{
+  "type": "relation",
+  "id": 4162907,
+  "center": {
+    "lat": 51.3143490,
+    "lon": 12.3157355
+  },
+  "members": [
+    {
+      "type": "way",
+      "ref": 311027711,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 311027650,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 193701483,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 311027656,
+      "role": "outer"
+    }
+  ],
+  "tags": {
+    "announcement": "no",
+    "bench": "yes",
+    "bin": "yes",
+    "check_date:shelter": "2025-10-11",
+    "lit": "yes",
+    "name": "Kurt-Kresse-Straße",
+    "passenger_information_display": "no",
+    "public_transport": "platform",
+    "railway": "platform",
+    "shelter": "yes",
+    "surface": "paved",
+    "tactile_paving": "yes",
+    "type": "multipolygon"
+  }
+},
+{
+  "type": "relation",
+  "id": 4253769,
+  "center": {
+    "lat": 47.5456395,
+    "lon": 9.6807817
+  },
+  "members": [
+    {
+      "type": "way",
+      "ref": 296856412,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 516931863,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 115711461,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 516931860,
+      "role": "outer"
+    }
+  ],
+  "tags": {
+    "bench": "yes",
+    "bin": "yes",
+    "height": "0.38",
+    "level": "0",
+    "lit": "yes",
+    "name": "Lindau-Insel",
+    "official_name": "Lindau-Insel",
+    "public_transport": "platform",
+    "railway": "platform",
+    "ref": "1;2",
+    "shelter": "yes",
+    "surface": "paving_stones",
+    "tactile_paving": "yes",
+    "train": "yes",
+    "type": "multipolygon"
+  }
+},
+{
+  "type": "relation",
+  "id": 4624917,
+  "center": {
+    "lat": 45.8907053,
+    "lon": 11.0335135
+  },
+  "members": [
+    {
+      "type": "way",
+      "ref": 330031479,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 516931885,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 238166414,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 516931886,
+      "role": "outer"
+    }
+  ],
+  "tags": {
+    "bench": "yes",
+    "bin": "yes",
+    "lit": "yes",
+    "name": "Rovereto",
+    "public_transport": "platform",
+    "railway": "platform",
+    "ref": "2;3",
+    "shelter": "yes",
+    "tactile_paving": "yes",
+    "train": "yes",
+    "type": "multipolygon"
+  }
+},
+{
+  "type": "relation",
+  "id": 6007947,
+  "center": {
+    "lat": 50.7179309,
+    "lon": 11.3381098
+  },
+  "members": [
+    {
+      "type": "way",
+      "ref": 129785177,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 400151993,
+      "role": "inner"
+    }
+  ],
+  "tags": {
+    "bench": "yes",
+    "bin": "yes",
+    "departures_board": "realtime",
+    "description": "Rudolstadt (Thür), Bahnsteig 1",
+    "height": "0.38",
+    "level": "0",
+    "lit": "yes",
+    "operator": "DB InfraGO AG",
+    "proposed:height": "0.55",
+    "public_transport": "platform",
+    "railway": "platform",
+    "ref": "1",
+    "shelter": "yes",
+    "surface": "paving_stones",
+    "tactile_paving": "no",
+    "train": "yes",
+    "type": "multipolygon",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "relation",
+  "id": 6440980,
+  "center": {
+    "lat": 47.7114215,
+    "lon": 10.3173575
+  },
+  "members": [
+    {
+      "type": "way",
+      "ref": 930199246,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 179264271,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 930199249,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 362555425,
+      "role": "inner"
+    }
+  ],
+  "tags": {
+    "bench": "yes",
+    "bin": "yes",
+    "construction": "yes",
+    "departures_board": "realtime",
+    "height": "0.38",
+    "lit": "yes",
+    "name": "Bstg. 2/3",
+    "opening_date": "2026-11-30",
+    "public_transport": "platform",
+    "railway": "platform",
+    "ref": "2;3",
+    "ref:IFOPT": "de:09763:99:4",
+    "shelter": "yes",
+    "tactile_paving": "no",
+    "train": "yes",
+    "type": "multipolygon"
+  }
+},
+{
+  "type": "relation",
+  "id": 6440981,
+  "center": {
+    "lat": 47.7115132,
+    "lon": 10.3176758
+  },
+  "members": [
+    {
+      "type": "way",
+      "ref": 118059901,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 930199244,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 930199245,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 930199250,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 362555423,
+      "role": "inner"
+    },
+    {
+      "type": "way",
+      "ref": 1141462542,
+      "role": "inner"
+    }
+  ],
+  "tags": {
+    "bench": "yes",
+    "bin": "yes",
+    "height": "0.38",
+    "lit": "yes",
+    "name": "Kempten (Allgäu) Hbf",
+    "public_transport": "platform",
+    "railway": "platform",
+    "ref": "4;5",
+    "ref:IFOPT": "de:09763:99:5",
+    "shelter": "yes",
+    "tactile_paving": "no",
+    "train": "yes",
+    "type": "multipolygon"
+  }
+},
+{
+  "type": "relation",
+  "id": 6642669,
+  "center": {
+    "lat": 53.4036016,
+    "lon": 9.9744195
+  },
+  "members": [
+    {
+      "type": "way",
+      "ref": 123721977,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 447234462,
+      "role": "inner"
+    },
+    {
+      "type": "way",
+      "ref": 447234463,
+      "role": "inner"
+    }
+  ],
+  "tags": {
+    "bench": "yes",
+    "bin": "yes",
+    "covered": "no",
+    "description": "Hittfeld, Bahnsteig 1+2",
+    "lit": "yes",
+    "public_transport": "platform",
+    "railway": "platform",
+    "ref": "1;2",
+    "surface": "paving_stones",
+    "tactile_paving": "yes",
+    "train": "yes",
+    "type": "multipolygon"
+  }
+},
+{
+  "type": "relation",
+  "id": 6653805,
+  "center": {
+    "lat": 50.4865716,
+    "lon": 11.3833138
+  },
+  "members": [
+    {
+      "type": "way",
+      "ref": 288429697,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 448287775,
+      "role": "inner"
+    }
+  ],
+  "tags": {
+    "area": "yes",
+    "bench": "yes",
+    "bin": "yes",
+    "height": "0.10",
+    "lit": "yes",
+    "operator": "DB InfraGO",
+    "public_transport": "platform",
+    "railway": "platform",
+    "ref": "1",
+    "ref:IFOPT": "de:09476:15530:1:1",
+    "shelter": "yes",
+    "tactile_paving": "no",
+    "train": "yes",
+    "type": "multipolygon"
+  }
+},
+{
+  "type": "relation",
+  "id": 7339587,
+  "center": {
+    "lat": 51.3350447,
+    "lon": 12.3697304
+  },
+  "members": [
+    {
+      "type": "way",
+      "ref": 501291895,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 203104401,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 501291876,
+      "role": "outer"
+    }
+  ],
+  "tags": {
+    "bench": "yes",
+    "bin": "yes",
+    "bus": "yes",
+    "kerb": "raised",
+    "lit": "yes",
+    "name": "Neues Rathaus",
+    "passenger_information_display": "yes",
+    "passenger_information_display:speech_output": "no",
+    "public_transport": "platform",
+    "railway": "platform",
+    "shelter": "yes",
+    "surface": "paved",
+    "tactile_paving": "yes",
+    "tram": "yes",
+    "type": "multipolygon"
+  }
+},
+{
+  "type": "relation",
+  "id": 7339588,
+  "center": {
+    "lat": 51.3349621,
+    "lon": 12.3697451
+  },
+  "members": [
+    {
+      "type": "way",
+      "ref": 501291872,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 501291873,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 203104406,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 501291897,
+      "role": "outer"
+    }
+  ],
+  "tags": {
+    "bench": "yes",
+    "bin": "yes",
+    "bus": "yes",
+    "departures_board": "yes",
+    "highway": "platform",
+    "kerb": "raised",
+    "lit": "yes",
+    "name": "Neues Rathaus",
+    "network": "Mitteldeutscher Verkehrsverbund",
+    "operator": "Leipziger Verkehrsbetriebe",
+    "passenger_information_display": "yes",
+    "passenger_information_display:speech_output": "no",
+    "public_transport": "platform",
+    "railway": "platform",
+    "shelter": "yes",
+    "surface": "paved",
+    "tactile_paving": "yes",
+    "tram": "yes",
+    "type": "multipolygon"
+  }
+},
+{
+  "type": "relation",
+  "id": 7351243,
+  "center": {
+    "lat": 50.3677286,
+    "lon": 8.7490413
+  },
+  "members": [
+    {
+      "type": "way",
+      "ref": 180442395,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 502841048,
+      "role": "inner"
+    }
+  ],
+  "tags": {
+    "announcement": "yes",
+    "bench": "yes",
+    "bin": "yes",
+    "description": "Gleis 1",
+    "level": "1",
+    "lit": "yes",
+    "name": "Bad Nauheim",
+    "operator": "DB Station&Service AG",
+    "passenger_information_display": "yes",
+    "public_transport": "platform",
+    "railway": "platform",
+    "ref": "1",
+    "shelter": "yes",
+    "surface": "paving_stones",
+    "tactile_paving": "yes",
+    "train": "yes",
+    "type": "multipolygon",
+    "wheelchair": "limited"
+  }
+},
+{
+  "type": "relation",
+  "id": 7357472,
+  "center": {
+    "lat": 50.3933002,
+    "lon": 8.1037787
+  },
+  "members": [
+    {
+      "type": "way",
+      "ref": 112446843,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 598582312,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 598582314,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 598582313,
+      "role": "outer"
+    }
+  ],
+  "tags": {
+    "bench": "yes",
+    "bin": "yes",
+    "check_date:shelter": "2026-05-25",
+    "lit": "yes",
+    "public_transport": "platform",
+    "railway": "platform",
+    "ref": "2;3",
+    "shelter": "yes",
+    "tactile_paving": "no",
+    "train": "yes",
+    "type": "multipolygon"
+  }
+},
+{
+  "type": "relation",
+  "id": 11640765,
+  "center": {
+    "lat": 46.7962508,
+    "lon": 13.4873229
+  },
+  "members": [
+    {
+      "type": "way",
+      "ref": 401404216,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 848850005,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 161812739,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 848850006,
+      "role": "outer"
+    }
+  ],
+  "tags": {
+    "bench": "yes",
+    "bin": "yes",
+    "lit": "yes",
+    "public_transport": "platform",
+    "railway": "platform",
+    "ref": "2;3",
+    "shelter": "yes",
+    "tactile_paving": "yes",
+    "train": "yes",
+    "type": "multipolygon",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "relation",
+  "id": 11640766,
+  "center": {
+    "lat": 46.7962012,
+    "lon": 13.4871669
+  },
+  "members": [
+    {
+      "type": "way",
+      "ref": 848850010,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 848850008,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 848850009,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 848850007,
+      "role": "outer"
+    }
+  ],
+  "tags": {
+    "bench": "yes",
+    "bin": "yes",
+    "lit": "yes",
+    "public_transport": "platform",
+    "railway": "platform",
+    "ref": "4;5",
+    "shelter": "yes",
+    "tactile_paving": "yes",
+    "train": "yes",
+    "type": "multipolygon",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "relation",
+  "id": 11786892,
+  "center": {
+    "lat": 52.5377005,
+    "lon": 13.1414205
+  },
+  "members": [
+    {
+      "type": "way",
+      "ref": 48040466,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 863069441,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 863069443,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 863069442,
+      "role": "outer"
+    }
+  ],
+  "tags": {
+    "area": "yes",
+    "bench": "yes",
+    "bin": "yes",
+    "lit": "yes",
+    "operator": "DB InfraGO",
+    "public_transport": "platform",
+    "railway": "platform",
+    "ref": "1;2",
+    "ref:IFOPT": "de:11000:900029305:1",
+    "shelter": "yes",
+    "tactile_paving": "yes",
+    "train": "yes",
+    "type": "multipolygon",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "relation",
+  "id": 11819997,
+  "center": {
+    "lat": 47.8494798,
+    "lon": 17.2673889
+  },
+  "members": [
+    {
+      "type": "way",
+      "ref": 297439946,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 865981462,
+      "role": "inner"
+    },
+    {
+      "type": "way",
+      "ref": 865981470,
+      "role": "inner"
+    }
+  ],
+  "tags": {
+    "bench": "yes",
+    "bin": "yes",
+    "public_transport": "platform",
+    "railway": "platform",
+    "shelter": "yes",
+    "tactile_paving": "no",
+    "train": "yes",
+    "type": "multipolygon"
+  }
+},
+{
+  "type": "relation",
+  "id": 14426317,
+  "center": {
+    "lat": 50.8618210,
+    "lon": 12.9532481
+  },
+  "members": [
+    {
+      "type": "way",
+      "ref": 591563030,
+      "role": "inner"
+    },
+    {
+      "type": "way",
+      "ref": 1083868128,
+      "role": "outer"
+    }
+  ],
+  "tags": {
+    "announcement": "yes",
+    "bench": "yes",
+    "bin": "yes",
+    "description": "Chemnitz-Hilbersdorf, Bstg. 2",
+    "level": "1",
+    "lit": "yes",
+    "local_ref": "2",
+    "operator": "DB InfraGO",
+    "passenger_information_display": "yes",
+    "passenger_information_display:speech_output": "yes",
+    "platform_lift": "no",
+    "public_transport": "platform",
+    "railway": "platform",
+    "ramp:portable": "no",
+    "ref:IFOPT": "de:14511:30085:3:2",
+    "shelter": "yes",
+    "surface": "paved",
+    "tactile_paving": "yes",
+    "train": "yes",
+    "type": "multipolygon",
+    "wheelchair": "limited"
+  }
+},
+{
+  "type": "relation",
+  "id": 15870988,
+  "center": {
+    "lat": 55.5448896,
+    "lon": 9.6165907
+  },
+  "members": [
+    {
+      "type": "way",
+      "ref": 1174007579,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 149780968,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 1174007578,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 1174007580,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 1174007577,
+      "role": "outer"
+    }
+  ],
+  "tags": {
+    "covered": "no",
+    "lit": "yes",
+    "public_transport": "platform",
+    "railway": "platform",
+    "ref": "2;3",
+    "surface": "grass",
+    "tactile_paving": "no",
+    "type": "multipolygon",
+    "wheelchair": "no"
+  }
+},
+{
+  "type": "relation",
+  "id": 16163230,
+  "center": {
+    "lat": 51.3040027,
+    "lon": 14.9020722
+  },
+  "members": [
+    {
+      "type": "way",
+      "ref": 1195025469,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 275854472,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 1195025468,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 1195025467,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 1195025466,
+      "role": "inner"
+    }
+  ],
+  "tags": {
+    "bench": "yes",
+    "bin": "yes",
+    "departures_board": "realtime",
+    "foot": "yes",
+    "level": "0",
+    "operator": "DB InfraGO AG",
+    "public_transport": "platform",
+    "railway": "platform",
+    "ref": "1;2",
+    "shelter": "yes",
+    "surface": "paving_stones",
+    "train": "yes",
+    "type": "multipolygon"
+  }
+},
+{
+  "type": "relation",
+  "id": 17743710,
+  "center": {
+    "lat": 50.9104960,
+    "lon": 9.1857287
+  },
+  "members": [
+    {
+      "type": "way",
+      "ref": 529392383,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 984709800,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 984709798,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 984709799,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 962672345,
+      "role": "inner"
+    },
+    {
+      "type": "way",
+      "ref": 1268490348,
+      "role": "inner"
+    },
+    {
+      "type": "way",
+      "ref": 1293937495,
+      "role": "inner"
+    }
+  ],
+  "tags": {
+    "announcement": "yes",
+    "bench": "yes",
+    "lit": "yes",
+    "operator": "DB InfraGO AG",
+    "passenger_information_display": "yes",
+    "passenger_information_display:speech_output": "no",
+    "public_transport": "platform",
+    "railway": "platform",
+    "ref": "2;3",
+    "shelter": "yes",
+    "surface": "paved",
+    "train": "yes",
+    "type": "multipolygon"
+  }
+},
+{
+  "type": "relation",
+  "id": 17925960,
+  "center": {
+    "lat": 50.3678286,
+    "lon": 8.7492223
+  },
+  "members": [
+    {
+      "type": "way",
+      "ref": 974193785,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 1307019577,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 1307019575,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 1307019576,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 502841043,
+      "role": "inner"
+    },
+    {
+      "type": "way",
+      "ref": 502841052,
+      "role": "inner"
+    },
+    {
+      "type": "way",
+      "ref": 1307019578,
+      "role": "inner"
+    },
+    {
+      "type": "way",
+      "ref": 502841042,
+      "role": "inner"
+    },
+    {
+      "type": "way",
+      "ref": 1307019579,
+      "role": "inner"
+    }
+  ],
+  "tags": {
+    "bench": "yes",
+    "bin": "yes",
+    "covered": "yes",
+    "description": "Bad Nauheim Gleis 2 & 3",
+    "lit": "yes",
+    "operator": "DB Station&Service AG",
+    "passenger_information_display": "yes",
+    "public_transport": "platform",
+    "railway": "platform",
+    "ref": "2;3",
+    "shelter": "yes",
+    "tactile_paving": "yes",
+    "train": "yes",
+    "type": "multipolygon"
+  }
+},
+{
+  "type": "relation",
+  "id": 19036242,
+  "center": {
+    "lat": 51.3297189,
+    "lon": 6.6099086
+  },
+  "members": [
+    {
+      "type": "way",
+      "ref": 1381152377,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 36883754,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 1381152378,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 1381152376,
+      "role": "outer"
+    }
+  ],
+  "tags": {
+    "area": "yes",
+    "bench": "yes",
+    "bin": "yes",
+    "covered": "shelter",
+    "departures_board": "realtime",
+    "description": "Krefeld-Oppum, Bahnsteig 2+3",
+    "height": "0.76",
+    "level": "0",
+    "lit": "yes",
+    "local_ref": "2;3",
+    "name": "Krefeld-Oppum",
+    "network": "VRR",
+    "operator": "DB InfraGO AG",
+    "passenger_information_display": "yes",
+    "platform_lift": "no",
+    "public_transport": "platform",
+    "railway": "platform",
+    "ref": "2;3",
+    "shelter": "yes",
+    "surface": "paving_stones",
+    "tactile_paving": "contrasted",
+    "train": "yes",
+    "type": "multipolygon",
+    "wheelchair": "yes"
+  }
+},
+{
+  "type": "relation",
+  "id": 19659993,
+  "center": {
+    "lat": 54.0923856,
+    "lon": 13.3713046
+  },
+  "members": [
+    {
+      "type": "way",
+      "ref": 27038243,
+      "role": "outer"
+    },
+    {
+      "type": "way",
+      "ref": 1434012584,
+      "role": "outer"
+    }
+  ],
+  "tags": {
+    "area": "yes",
+    "bench": "yes",
+    "bin": "yes",
+    "covered": "yes",
+    "departures_board": "realtime",
+    "height": "0.55",
+    "level": "0",
+    "lit": "yes",
+    "narrow": "2.1",
+    "operator": "DB InfraGO AG",
+    "passenger_information_display": "yes",
+    "public_transport": "platform",
+    "railway": "platform",
+    "ref": "1",
+    "ref:IFOPT": "de:13075:1",
+    "shelter": "yes",
+    "surface": "paving_stones",
+    "tactile_paving": "yes",
+    "toilets:wheelchair": "no",
+    "train": "yes",
+    "type": "multipolygon",
+    "wheelchair": "limited"
+  }
+},
+{
+  "type": "relation",
+  "id": 3948339,
+  "members": [
+    {
+      "type": "node",
+      "ref": 13801901,
+      "role": ""
+    },
+    {
+      "type": "node",
+      "ref": 3006671114,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 3006671110,
+      "role": "stop"
+    },
+    {
+      "type": "relation",
+      "ref": 4253769,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 3006671115,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 3006671119,
+      "role": "stop"
+    },
+    {
+      "type": "relation",
+      "ref": 7088676,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 3006671118,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 3006671116,
+      "role": "stop"
+    },
+    {
+      "type": "relation",
+      "ref": 7088677,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 3006671111,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 3006671113,
+      "role": "stop"
+    },
+    {
+      "type": "relation",
+      "ref": 7088678,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 482794562,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 293355508,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 274070990,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 476091609,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 394223456,
+      "role": ""
+    },
+    {
+      "type": "node",
+      "ref": 3950445480,
+      "role": "stop"
+    },
+    {
+      "type": "way",
+      "ref": 394223454,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 3950445481,
+      "role": "stop"
+    },
+    {
+      "type": "way",
+      "ref": 394223455,
+      "role": "platform"
+    },
+    {
+      "type": "way",
+      "ref": 91616703,
+      "role": ""
+    },
+    {
+      "type": "way",
+      "ref": 394223460,
+      "role": "platform"
+    },
+    {
+      "type": "way",
+      "ref": 394223458,
+      "role": "platform"
+    },
+    {
+      "type": "way",
+      "ref": 394223461,
+      "role": "platform"
+    },
+    {
+      "type": "way",
+      "ref": 394223463,
+      "role": "platform"
+    }
+  ],
+  "tags": {
+    "bus": "yes",
+    "check_date:service_times:wheelchair": "2024-05-07",
+    "name": "Lindau Inselbf",
+    "network": "Bodensee-Oberschwaben Verkehrsverbund",
+    "network:short": "bodo",
+    "public_transport": "stop_area",
+    "service_times:wheelchair": "09:30-10:30, 11:30-18:30",
+    "type": "public_transport"
+  }
+}
+
+  ]
+}

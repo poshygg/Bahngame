@@ -1,0 +1,1179 @@
+{
+  "checkedAt": "2026-09-13",
+  "selected": 938,
+  "imported": 911,
+  "stations": 5073,
+  "rejected": [
+    {
+      "id": 11001,
+      "reason": "unresolved colocated stop/platform pair"
+    },
+    {
+      "id": 34488,
+      "reason": "unresolved colocated stop/platform pair"
+    },
+    {
+      "id": 79823,
+      "reason": "unresolved colocated stop/platform pair"
+    },
+    {
+      "id": 147373,
+      "reason": "unresolved colocated stop/platform pair"
+    },
+    {
+      "id": 147394,
+      "reason": "unresolved colocated stop/platform pair"
+    },
+    {
+      "id": 147398,
+      "reason": "unresolved colocated stop/platform pair"
+    },
+    {
+      "id": 147471,
+      "reason": "unresolved colocated stop/platform pair"
+    },
+    {
+      "id": 296165,
+      "reason": "missing named/location stop member"
+    },
+    {
+      "id": 374864,
+      "reason": "missing named/location stop member"
+    },
+    {
+      "id": 1691728,
+      "reason": "unresolved colocated stop/platform pair"
+    },
+    {
+      "id": 1694577,
+      "reason": "unresolved colocated stop/platform pair"
+    },
+    {
+      "id": 1805485,
+      "reason": "missing named/location stop member"
+    },
+    {
+      "id": 1824656,
+      "reason": "missing named/location stop member"
+    },
+    {
+      "id": 1827970,
+      "reason": "missing named/location stop member"
+    },
+    {
+      "id": 2606964,
+      "reason": "missing named/location stop member"
+    },
+    {
+      "id": 2888721,
+      "reason": "unresolved colocated stop/platform pair"
+    },
+    {
+      "id": 3004644,
+      "reason": "unresolved colocated stop/platform pair"
+    },
+    {
+      "id": 3376752,
+      "reason": "unresolved colocated stop/platform pair"
+    },
+    {
+      "id": 3474911,
+      "reason": "unresolved colocated stop/platform pair"
+    },
+    {
+      "id": 3474947,
+      "reason": "unresolved colocated stop/platform pair"
+    },
+    {
+      "id": 3692601,
+      "reason": "missing named/location stop member"
+    },
+    {
+      "id": 3874568,
+      "reason": "unresolved colocated stop/platform pair"
+    },
+    {
+      "id": 7779428,
+      "reason": "no German stops"
+    },
+    {
+      "id": 7779429,
+      "reason": "no German stops"
+    },
+    {
+      "id": 7819669,
+      "reason": "missing named/location stop member"
+    },
+    {
+      "id": 20685869,
+      "reason": "unresolved colocated stop/platform pair"
+    },
+    {
+      "id": 20955960,
+      "reason": "unresolved colocated stop/platform pair"
+    }
+  ],
+  "rejectedUicUnions": [
+    {
+      "uicRef": "8006698",
+      "sourceIds": [
+        "node/27318343",
+        "relation/8305871"
+      ],
+      "reason": "source clusters exceed interchange diameter",
+      "diameterKm": 320.61761330658265
+    },
+    {
+      "uicRef": "8001583",
+      "sourceIds": [
+        "relation/6259951",
+        "relation/3272970"
+      ],
+      "reason": "source clusters exceed interchange diameter",
+      "diameterKm": 419.4801881705448
+    },
+    {
+      "uicRef": "8005766",
+      "sourceIds": [
+        "relation/9715457",
+        "relation/3872245"
+      ],
+      "reason": "source clusters exceed interchange diameter",
+      "diameterKm": 80.37571026854825
+    },
+    {
+      "uicRef": "8003477",
+      "sourceIds": [
+        "relation/5829390",
+        "relation/1229776"
+      ],
+      "reason": "source clusters exceed interchange diameter",
+      "diameterKm": 284.45902860936036
+    },
+    {
+      "uicRef": "8003238",
+      "sourceIds": [
+        "relation/1389327",
+        "node/4432606580"
+      ],
+      "reason": "source clusters exceed interchange diameter",
+      "diameterKm": 360.59188892291724
+    }
+  ],
+  "clusterAudit": {
+    "maximumDiameterKm": 3,
+    "clustersChecked": 6267,
+    "ambiguousClusters": []
+  },
+  "missing": [
+    {
+      "type": "way",
+      "ref": 142211680,
+      "role": "platform"
+    },
+    {
+      "type": "way",
+      "ref": 35096219,
+      "role": "platform"
+    },
+    {
+      "type": "way",
+      "ref": 35096220,
+      "role": "platform"
+    },
+    {
+      "type": "node",
+      "ref": 980410503,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 5680209208,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 980410464,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 980410489,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 13429931167,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 980428522,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 439750255,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 2834047272,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 24691504,
+      "role": "stop"
+    },
+    {
+      "type": "node",
+      "ref": 24692835,
+      "role": "stop"
+    },
+    {
+      "type": "way",
+      "ref": 393487775,
+      "role": "platform"
+    },
+    {
+      "type": "way",
+      "ref": 1456903290,
+      "role": "platform"
+    }
+  ],
+  "states": [
+    {
+      "id": "DE-BB",
+      "lines": 88,
+      "stations": 315
+    },
+    {
+      "id": "DE-BE",
+      "lines": 98,
+      "stations": 322
+    },
+    {
+      "id": "DE-BW",
+      "lines": 175,
+      "stations": 683
+    },
+    {
+      "id": "DE-BY",
+      "lines": 155,
+      "stations": 518
+    },
+    {
+      "id": "DE-HB",
+      "lines": 40,
+      "stations": 155
+    },
+    {
+      "id": "DE-HE",
+      "lines": 150,
+      "stations": 297
+    },
+    {
+      "id": "DE-HH",
+      "lines": 72,
+      "stations": 133
+    },
+    {
+      "id": "DE-MV",
+      "lines": 48,
+      "stations": 182
+    },
+    {
+      "id": "DE-NI",
+      "lines": 130,
+      "stations": 409
+    },
+    {
+      "id": "DE-NW",
+      "lines": 183,
+      "stations": 895
+    },
+    {
+      "id": "DE-RP",
+      "lines": 70,
+      "stations": 236
+    },
+    {
+      "id": "DE-SH",
+      "lines": 47,
+      "stations": 74
+    },
+    {
+      "id": "DE-SL",
+      "lines": 20,
+      "stations": 74
+    },
+    {
+      "id": "DE-SN",
+      "lines": 73,
+      "stations": 284
+    },
+    {
+      "id": "DE-ST",
+      "lines": 69,
+      "stations": 227
+    },
+    {
+      "id": "DE-TH",
+      "lines": 46,
+      "stations": 96
+    }
+  ],
+  "cities": [
+    {
+      "id": "berlin",
+      "refs": [
+        "RE6",
+        "RE2",
+        "RB12",
+        "RE5",
+        "RE1",
+        "IC77",
+        "RB14",
+        "ICE11",
+        "ICE12",
+        "ICE10",
+        "ICE28",
+        "S1",
+        "12",
+        "S7",
+        "18",
+        "16",
+        "21",
+        "U5",
+        "S2",
+        "IC56",
+        "U2",
+        "U1",
+        "U3",
+        "U4",
+        "U7",
+        "U8",
+        "U9",
+        "U6",
+        "EC173",
+        "EC172",
+        "ICE13",
+        "ICE15",
+        "EC95",
+        "RB21",
+        "ICE29",
+        "ICE18",
+        "EC379",
+        "EC378",
+        "EC54",
+        "EC55",
+        "FLX 30",
+        "FLX 10",
+        "FLX 35",
+        "IC17",
+        "ICE8",
+        "ICE16",
+        "ICE19",
+        "651A;ICE 9590",
+        "651A;ICE 9591"
+      ]
+    },
+    {
+      "id": "hamburg",
+      "refs": [
+        "U2",
+        "S5",
+        "U1",
+        "RE1",
+        "RE70",
+        "ICE20",
+        "ICE33",
+        "S1",
+        "U3",
+        "S3",
+        "ICE25",
+        "ICE28",
+        "S2",
+        "U4",
+        "IC30",
+        "ICE22",
+        "RE3",
+        "RB41",
+        "FLX 20",
+        "RB31",
+        "RE4",
+        "RE8",
+        "ICE1",
+        "ICE4",
+        "RE7",
+        "ICE18",
+        "ICE26",
+        "EC379",
+        "EC378",
+        "IC26.1",
+        "FLX 35",
+        "ICE39"
+      ]
+    },
+    {
+      "id": "munich",
+      "refs": [
+        "RB16",
+        "RE2",
+        "ICE41",
+        "IC62",
+        "ICE11",
+        "ICE47",
+        "S1",
+        "S2",
+        "931",
+        "ICE25",
+        "RE9",
+        "ICE28",
+        "17",
+        "12",
+        "ICE90",
+        "ICE60",
+        "EC62",
+        "EC112",
+        "EC113",
+        "U4",
+        "U5",
+        "U6",
+        "U3",
+        "U2",
+        "U1",
+        "U7",
+        "U8",
+        "EC83",
+        "EC82",
+        "ICE42",
+        "661A;ICE 83",
+        "EC99",
+        "EC98",
+        "ICE29",
+        "ICE18",
+        "EC114",
+        "EC115",
+        "RE1",
+        "RB6",
+        "EC88",
+        "EC89",
+        "EC80",
+        "EC81",
+        "EC86",
+        "EC87",
+        "EC84",
+        "EC85",
+        "16",
+        "ICE8",
+        "ICE2",
+        "14"
+      ]
+    },
+    {
+      "id": "nuremberg",
+      "refs": [
+        "RB16",
+        "ICE41",
+        "U1",
+        "S1",
+        "5",
+        "6",
+        "U2",
+        "U3",
+        "4",
+        "ICE91",
+        "ICE25",
+        "ICE28",
+        "RB21",
+        "IC61",
+        "ICE29",
+        "ICE18",
+        "7",
+        "S2",
+        "RE1",
+        "RB11",
+        "RB12",
+        "RE7",
+        "ICE8",
+        "ICE2",
+        "ICE39"
+      ]
+    },
+    {
+      "id": "cologne",
+      "refs": [
+        "IC55",
+        "ICE45",
+        "ICE78",
+        "ICE41",
+        "ICE10",
+        "ICE47",
+        "ICE79",
+        "18",
+        "RB24",
+        "RB25",
+        "RB26",
+        "RB27",
+        "RE8",
+        "RE9",
+        "S11",
+        "S6",
+        "IC30",
+        "ICE43",
+        "IC35",
+        "FLX 20",
+        "IC32",
+        "ICE49",
+        "ICE42",
+        "ES",
+        "ICE1",
+        "RE6 (RRX)",
+        "IC37",
+        "EC114",
+        "EC115",
+        "IC50",
+        "FLX 30",
+        "ICE2",
+        "ICE19",
+        "ICE39"
+      ]
+    },
+    {
+      "id": "duesseldorf",
+      "refs": [
+        "ICE78",
+        "ICE41",
+        "RE4",
+        "RE3",
+        "ICE47",
+        "ICE10",
+        "RE2",
+        "S1",
+        "RB39",
+        "U79",
+        "S11",
+        "S6",
+        "U77",
+        "U75",
+        "U76",
+        "U70",
+        "U78",
+        "IC30",
+        "IC35",
+        "RB33",
+        "FLX 20",
+        "IC32",
+        "U71",
+        "U83",
+        "701",
+        "U73",
+        "U72",
+        "704",
+        "705",
+        "706",
+        "ICE42",
+        "ES",
+        "ICE1",
+        "RE6 (RRX)",
+        "IC37",
+        "EC114",
+        "EC115",
+        "IC50",
+        "FLX 30",
+        "ICE2",
+        "ICE39",
+        "U81",
+        "U80"
+      ]
+    },
+    {
+      "id": "dortmund",
+      "refs": [
+        "U46",
+        "U35",
+        "IC55",
+        "U44",
+        "RE34",
+        "S2",
+        "RE16",
+        "RE4",
+        "RE3",
+        "ICE47",
+        "ICE10",
+        "S1",
+        "RB43",
+        "RB32",
+        "U47",
+        "U41",
+        "U45",
+        "U42",
+        "U43",
+        "IC30",
+        "ICE43",
+        "IC32",
+        "U49",
+        "ICE42",
+        "ES",
+        "RE6 (RRX)",
+        "EC114",
+        "IC50",
+        "FLX 30"
+      ]
+    },
+    {
+      "id": "essen",
+      "refs": [
+        "101",
+        "102",
+        "U11",
+        "U35",
+        "U18",
+        "RE14",
+        "S2",
+        "ICE78",
+        "ICE41",
+        "RE16",
+        "RE3",
+        "ICE47",
+        "ICE10",
+        "RE2",
+        "S1",
+        "U79",
+        "S6",
+        "RB43",
+        "U17",
+        "RB32",
+        "IC30",
+        "IC35",
+        "RB33",
+        "FLX 20",
+        "IC32",
+        "ICE42",
+        "ES",
+        "ICE1",
+        "RE6 (RRX)",
+        "EC114",
+        "EC115",
+        "IC50",
+        "FLX 30",
+        "ICE43",
+        "ICE39"
+      ]
+    },
+    {
+      "id": "frankfurt",
+      "refs": [
+        "S1",
+        "S3",
+        "S4",
+        "U3",
+        "U4",
+        "U5",
+        "U7",
+        "U6",
+        "U1",
+        "U2",
+        "RB10",
+        "RB12",
+        "ICE78",
+        "ICE41",
+        "RE3",
+        "U8",
+        "U9",
+        "IC62",
+        "ICE20",
+        "ICE11",
+        "ICE12",
+        "ICE91",
+        "ICE47",
+        "ICE79",
+        "ICE50",
+        "651B;ICE 82",
+        "EC62",
+        "EC112",
+        "EC113",
+        "ICE43",
+        "ICE22",
+        "RE2",
+        "ICE49",
+        "ICE13",
+        "ICE42",
+        "ICE15",
+        "ICE4",
+        "651A;ICE 82",
+        "RB31",
+        "ICE26",
+        "EC151",
+        "IC26.1",
+        "FLX 10",
+        "RB37",
+        "ICE2",
+        "ICE16",
+        "ICE39",
+        "651A;ICE 9590",
+        "651A;ICE 9591"
+      ]
+    },
+    {
+      "id": "wiesbaden",
+      "refs": [
+        "S1",
+        "RB10",
+        "RB21",
+        "RB75",
+        "S5",
+        "ICE45",
+        "RE3",
+        "ICE50",
+        "RE2",
+        "RB31",
+        "RB33"
+      ]
+    },
+    {
+      "id": "kassel",
+      "refs": [
+        "RT1",
+        "RT4",
+        "RB4",
+        "RB39",
+        "RT5",
+        "8",
+        "ICE12",
+        "ICE25",
+        "ICE20",
+        "ICE22",
+        "RE9",
+        "RE8",
+        "ICE13",
+        "ICE26",
+        "IC50",
+        "IC26.1",
+        "RE5"
+      ]
+    },
+    {
+      "id": "stuttgart",
+      "refs": [
+        "RE5",
+        "S3",
+        "RB11",
+        "S4",
+        "U3",
+        "U8",
+        "U1",
+        "U13",
+        "U7",
+        "U5",
+        "U6",
+        "U15",
+        "U2",
+        "U4",
+        "U9",
+        "U14",
+        "U11",
+        "U19",
+        "10",
+        "IC62",
+        "ICE11",
+        "U12",
+        "IC87",
+        "ICE47",
+        "21",
+        "RE1",
+        "ICE60",
+        "IC61",
+        "EC62",
+        "EC112",
+        "EC113",
+        "ICE22",
+        "IC32",
+        "661A;ICE 83",
+        "ICE42",
+        "23",
+        "EC114",
+        "EC115",
+        "U16",
+        "FLX 10"
+      ]
+    },
+    {
+      "id": "karlsruhe",
+      "refs": [
+        "S3",
+        "3",
+        "2",
+        "4",
+        "S2",
+        "ICE20",
+        "ICE12",
+        "RE2",
+        "RE1",
+        "ICE60",
+        "IC61",
+        "ICE43",
+        "661A;ICE 83",
+        "RB41",
+        "651A;ICE 82",
+        "ICE26",
+        "EC151",
+        "IC26.1",
+        "RE7",
+        "RB44",
+        "S6",
+        "651A;ICE 9590",
+        "651A;ICE 9591",
+        "1"
+      ]
+    },
+    {
+      "id": "freiburg",
+      "refs": [
+        "S1",
+        "P11;RB 28",
+        "1",
+        "2",
+        "ICE20",
+        "ICE12",
+        "3",
+        "ICE60",
+        "ICE43",
+        "4",
+        "EC151",
+        "RB27",
+        "S2",
+        "RB26",
+        "RE7",
+        "807A"
+      ]
+    },
+    {
+      "id": "hanover",
+      "refs": [
+        "2",
+        "3",
+        "S1",
+        "S2",
+        "IC56",
+        "IC55",
+        "RB38",
+        "IC77",
+        "ICE20",
+        "ICE10",
+        "ICE25",
+        "RE60",
+        "4",
+        "1",
+        "RE70",
+        "ICE43",
+        "ICE22",
+        "ICE4",
+        "RE1",
+        "ICE26",
+        "IC26.1",
+        "FLX 30",
+        "RE2",
+        "ICE19"
+      ]
+    },
+    {
+      "id": "braunschweig",
+      "refs": [
+        "4",
+        "3",
+        "1",
+        "2",
+        "IC56",
+        "IC55",
+        "RB40",
+        "ICE12",
+        "RE60",
+        "RE70",
+        "RB43",
+        "RB44",
+        "RB42",
+        "5",
+        "ICE13"
+      ]
+    },
+    {
+      "id": "bremen",
+      "refs": [
+        "4",
+        "3",
+        "IC56",
+        "RS1",
+        "1",
+        "RB58",
+        "2",
+        "RE9",
+        "RB37",
+        "IC30",
+        "RB41",
+        "RE4",
+        "RE1",
+        "ICE22",
+        "ICE25",
+        "RS2"
+      ]
+    },
+    {
+      "id": "kiel",
+      "refs": [
+        "RE70",
+        "RB84",
+        "ICE22",
+        "RE7",
+        "EC379",
+        "EC378",
+        "RB75",
+        "RB73"
+      ]
+    },
+    {
+      "id": "luebeck",
+      "refs": [
+        "RE4",
+        "RB84",
+        "RE8",
+        "RB85",
+        "RB86"
+      ]
+    },
+    {
+      "id": "rostock",
+      "refs": [
+        "S1",
+        "RB12",
+        "RE5",
+        "RE9",
+        "RE1",
+        "ICE33",
+        "1",
+        "2",
+        "3",
+        "4",
+        "S2",
+        "IC57",
+        "IC17",
+        "RB11"
+      ]
+    },
+    {
+      "id": "schwerin",
+      "refs": [
+        "RE1",
+        "RE4",
+        "ICE33",
+        "IC57"
+      ]
+    },
+    {
+      "id": "potsdam",
+      "refs": [
+        "93",
+        "94",
+        "RE1",
+        "91",
+        "92",
+        "RB33",
+        "S7",
+        "IC56",
+        "RB21"
+      ]
+    },
+    {
+      "id": "cottbus",
+      "refs": [
+        "RE10",
+        "2",
+        "RE2",
+        "RB49",
+        "RB65",
+        "4",
+        "3",
+        "1",
+        "RE18",
+        "IC56"
+      ]
+    },
+    {
+      "id": "mainz",
+      "refs": [
+        "RB10",
+        "51",
+        "50",
+        "RB75",
+        "S5",
+        "ICE45",
+        "RE3",
+        "52",
+        "ICE50",
+        "RB26",
+        "RE2",
+        "IC32",
+        "RB31",
+        "53",
+        "EC114",
+        "EC115",
+        "RB33",
+        "ICE39",
+        "S6",
+        "EX"
+      ]
+    },
+    {
+      "id": "koblenz",
+      "refs": [
+        "RB10",
+        "RB81",
+        "ICE10",
+        "RE1",
+        "RB26",
+        "RB27",
+        "RE8",
+        "RE2",
+        "IC32",
+        "IC37",
+        "EC114",
+        "EC115",
+        "ICE19",
+        "ICE39"
+      ]
+    },
+    {
+      "id": "saarbruecken",
+      "refs": [
+        "RE3",
+        "RE1",
+        "651B;ICE 82",
+        "S1",
+        "RB72",
+        "P34",
+        "RB68",
+        "C52;RE 18",
+        "ICE16"
+      ]
+    },
+    {
+      "id": "magdeburg",
+      "refs": [
+        "RB41",
+        "IC56",
+        "IC55",
+        "S1",
+        "RB40",
+        "RB47",
+        "RE1",
+        "RB36",
+        "N2",
+        "IC57",
+        "RB43",
+        "RE6",
+        "N8",
+        "1S"
+      ]
+    },
+    {
+      "id": "halle",
+      "refs": [
+        "S5",
+        "RB47",
+        "IC56",
+        "IC55",
+        "S11",
+        "S3",
+        "RE4",
+        "RE9",
+        "RE8",
+        "ICE15",
+        "IC57",
+        "ICE29",
+        "ICE18",
+        "RB25",
+        "FLX 10",
+        "ICE8",
+        "651A;ICE 9590",
+        "651A;ICE 9591"
+      ]
+    },
+    {
+      "id": "erfurt",
+      "refs": [
+        "RE7",
+        "ICE11",
+        "ICE50",
+        "ICE28",
+        "RE3",
+        "ICE15",
+        "ICE29",
+        "ICE18",
+        "IC50",
+        "FLX 10",
+        "ICE8",
+        "651A;ICE 9590",
+        "651A;ICE 9591"
+      ]
+    },
+    {
+      "id": "jena",
+      "refs": [
+        "IC61",
+        "3",
+        "RB28",
+        "RE3",
+        "RB21",
+        "RB25",
+        "IC50"
+      ]
+    },
+    {
+      "id": "leipzig",
+      "refs": [
+        "S5",
+        "RE6",
+        "RE10",
+        "IC56",
+        "IC55",
+        "RB110",
+        "ICE11",
+        "1",
+        "3E",
+        "3",
+        "RB22",
+        "ICE50",
+        "ICE28",
+        "S3",
+        "S1",
+        "IC61",
+        "S2",
+        "IC57",
+        "FLX 35",
+        "2"
+      ]
+    },
+    {
+      "id": "dresden",
+      "refs": [
+        "10",
+        "S2",
+        "S3",
+        "RB31",
+        "IC55",
+        "ICE50",
+        "RE18",
+        "RB30",
+        "EC173",
+        "EC172",
+        "20",
+        "EC379",
+        "EC378",
+        "RE1",
+        "IC17"
+      ]
+    }
+  ]
+}

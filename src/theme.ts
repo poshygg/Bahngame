@@ -1,0 +1,28 @@
+export const C = {
+  bg: "#F6F5F4",
+  paper: "#FFFFFF",
+  ink: "#191918",
+  muted: "#615D59",
+  faint: "#A39E98",
+  line: "#E6E6E6",
+  primary: "#0075DE",
+  primaryActive: "#005BAB",
+  secondary: "#213183",
+  orange: "#DD5B00",
+  orangeLight: "#FCF1E8",
+  green: "#1AAE39",
+  sage: "#F0F0EF",
+  soft: "#F6F5F4",
+  gold: "#D99429",
+  danger: "#C44640",
+  blue: "#62AEF0",
+  purple: "#D6B6F6",
+  pink: "#FF64C8",
+  teal: "#2A9D99",
+};
+export const F = {
+  regular: "Inter_400Regular",
+  medium: "Inter_500Medium",
+  bold: "Inter_700Bold",
+  mono: "Inter_500Medium",
+};

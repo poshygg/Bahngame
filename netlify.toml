@@ -1,0 +1,14 @@
+[build]
+  command = "npm run build:web && node scripts/prepare-netlify.cjs"
+  publish = "artifacts/netlify-site"
+
+[build.environment]
+  NODE_VERSION = "22"
+  EXPO_PUBLIC_ADS_MODE = "preview"
+
+# Non-forced SPA fallback: real JS, fonts and ODbL data files take precedence.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = false
