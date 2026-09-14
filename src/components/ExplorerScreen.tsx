@@ -7,6 +7,7 @@ import {
   useWindowDimensions,
   View,
 } from "react-native";
+import { Modal } from "react-native";
 import Svg, {
   Circle,
   G,
@@ -22,6 +23,8 @@ import { Progress, isStageUnlocked } from "../game/progress";
 import { useI18n } from "../i18n";
 import { C, F } from "../theme";
 import { Button, Eyebrow, Icon } from "./ui";
+import { GermanyBrowser } from "../features/explorer/GermanyBrowser";
+import { RailCatalogNote } from "../features/explorer/RailCatalogNote";
 import { CustomRouteBuilder } from "../features/custom/CustomRouteBuilder";
 import { AdSlot } from "../features/ads/AdSlot";
 
@@ -32,6 +35,8 @@ type Props = {
   onCountry: (country: string) => void;
   onTutorial: () => void;
   onStart: (stage: Stage) => void;
+  onRecords: () => void;
+  onSettings: () => void;
   onCustomStart?: (stage: Stage) => void;
 };
 export function ExplorerScreen({
@@ -41,6 +46,8 @@ export function ExplorerScreen({
   onCountry,
   onTutorial,
   onStart,
+  onRecords,
+  onSettings,
   onCustomStart,
 }: Props) {
   const { width } = useWindowDimensions();
@@ -48,11 +55,15 @@ export function ExplorerScreen({
   const tablet = width < 1080;
   const { t, l, locale } = useI18n();
   const [showCustomBuilder, setShowCustomBuilder] = useState(false);
+  const [showRailBrowser, setShowRailBrowser] = useState(false);
   const [launchCountryId, setLaunchCountryId] = useState(progress.countryId);
-  const [launchIndex, setLaunchIndex] = useState(selected);
+  const [launchIndex, setLaunchIndex] = useState<number | null>(selected);
+  const [customStage, setCustomStage] = useState<Stage | null>(null);
   const launchCountry = getCountry(launchCountryId);
   const launchStages = getCountryStages(launchCountryId);
-  const selectedLaunchStage = launchStages[launchIndex] ?? launchStages[0];
+  const selectedCatalogStage =
+    launchIndex === null ? undefined : launchStages[launchIndex];
+  const selectedLaunchStage = customStage ?? selectedCatalogStage;
   const launchRules =
     selectedLaunchStage ? stageRules(selectedLaunchStage, progress.profile) : null;
   const launchUnlocked = selectedLaunchStage
@@ -61,12 +72,17 @@ export function ExplorerScreen({
   const canStartLaunch = Boolean(selectedLaunchStage && launchUnlocked);
   const selectLaunchCountry = (countryId: string) => {
     setLaunchCountryId(countryId);
-    setLaunchIndex(0);
+    setLaunchIndex(null);
+    setCustomStage(null);
   };
   const launch = () => {
     if (!selectedLaunchStage || !canStartLaunch) return;
     onCountry(launchCountryId);
-    onSelect(launchIndex);
+    if (customStage && onCustomStart) {
+      onCustomStart(customStage);
+      return;
+    }
+    if (launchIndex !== null) onSelect(launchIndex);
     onStart(selectedLaunchStage);
   };
   return (
@@ -124,57 +140,52 @@ export function ExplorerScreen({
                 </View>
               ) : (
                 <>
-                  <ScrollView
-                    horizontal
-                    showsHorizontalScrollIndicator={false}
-                    contentContainerStyle={s.quickRoutes}
-                  >
-                    {launchStages.map((candidate, index) => {
-                      const unlocked = isStageUnlocked(
-                        progress,
-                        candidate,
-                        progress.profile,
-                      );
-                      return (
-                        <Pressable
-                          key={candidate.id}
-                          accessibilityRole="button"
-                          accessibilityLabel={`${candidate.city} ${candidate.line}`}
-                          disabled={!unlocked}
-                          aria-pressed={index === launchIndex}
-                          onPress={() => setLaunchIndex(index)}
-                          style={[
-                            s.quickRoute,
-                            index === launchIndex && s.quickRouteActive,
-                            !unlocked && s.quickRouteLocked,
-                          ]}
-                        >
-                          <Text
-                            style={[
-                              s.quickRouteName,
-                              index === launchIndex && s.quickRouteActiveText,
-                              !unlocked && s.quickRouteDisabled,
-                            ]}
-                          >
-                            {l(candidate.areaName ?? candidate.city)}
-                          </Text>
-                          <Text
-                            style={[
-                              s.quickRouteMeta,
-                              index === launchIndex && { color: C.primary },
-                            ]}
-                          >
-                            {candidate.line}
-                          </Text>
-                          {!unlocked && (
-                            <Text style={s.quickRouteLockedText}>
-                              {t("locked")}
-                            </Text>
-                          )}
-                        </Pressable>
-                      );
-                    })}
-                  </ScrollView>
+                  <View style={[s.methodRow, mobile && s.methodRowMobile]}>
+                    <Pressable
+                      testID="open-rail-browser"
+                      accessibilityRole="button"
+                      onPress={() => setShowRailBrowser(true)}
+                      style={s.methodCard}
+                    >
+                      <View style={s.methodIcon}>
+                        <Icon name="map" size={24} color={C.primary} />
+                      </View>
+                      <Text style={s.methodTitle}>
+                        {locale === "de" ? "Auf der Karte wählen" : "Choose on the map"}
+                      </Text>
+                      <Text style={s.methodBody}>
+                        {locale === "de"
+                          ? "Region, Stadt und Bahnlinie durchsuchen."
+                          : "Browse regions, cities and rail lines."}
+                      </Text>
+                      <Text style={s.methodLink}>
+                        {locale === "de" ? "Karte öffnen →" : "Open route map →"}
+                      </Text>
+                    </Pressable>
+                    {onCustomStart && (
+                      <Pressable
+                        testID="open-custom-builder"
+                        accessibilityRole="button"
+                        onPress={() => setShowCustomBuilder(true)}
+                        style={s.methodCard}
+                      >
+                        <View style={s.methodIcon}>
+                          <Icon name="ticket" size={24} color={C.primary} />
+                        </View>
+                        <Text style={s.methodTitle}>
+                          {locale === "de" ? "Eigene Route planen" : "Build your own route"}
+                        </Text>
+                        <Text style={s.methodBody}>
+                          {locale === "de"
+                            ? "Start und Ziel selbst festlegen."
+                            : "Choose your own origin and destination."}
+                        </Text>
+                        <Text style={s.methodLink}>
+                          {locale === "de" ? "Route erstellen →" : "Create a route →"}
+                        </Text>
+                      </Pressable>
+                    )}
+                  </View>
                   {selectedLaunchStage && (
                     <View style={s.quickSummary}>
                       <View>
@@ -195,6 +206,9 @@ export function ExplorerScreen({
                           ? `  ·  ${t("timeLimit")}: ${launchRules.seconds}s`
                           : ""}
                       </Text>
+                      <Pressable accessibilityRole="button" onPress={onSettings}>
+                        <Text style={s.settingsLinkText}>{t("settings")} ↗</Text>
+                      </Pressable>
                     </View>
                   )}
                   <Button
@@ -206,7 +220,9 @@ export function ExplorerScreen({
                   />
                   {!canStartLaunch && (
                     <Text style={s.quickRouteLockedText}>
-                      {t("locked")}
+                      {locale === "de"
+                        ? "Wähle zuerst eine Route."
+                        : "Choose a route before starting."}
                     </Text>
                   )}
                 </>
@@ -249,39 +265,85 @@ export function ExplorerScreen({
             />
           </View>
         )}
-        {onCustomStart && (
-          <View style={s.customSection}>
-            <Pressable
-              testID="custom-builder-toggle"
-              accessibilityRole="button"
-              aria-expanded={showCustomBuilder}
-              onPress={() => setShowCustomBuilder(!showCustomBuilder)}
-              style={s.customToggle}
-            >
-              <Icon name="ticket" size={22} color={C.primary} />
-              <View style={{ flex: 1 }}>
-                <Text style={s.customTitle}>
-                  {locale === "de"
-                    ? "Eigene Route planen"
-                    : "Build your route"}
-                </Text>
-                <Text style={s.sectionBody}>
-                  {locale === "de"
-                    ? "Wähle Start und Ziel für deine nächste Reise."
-                    : "Choose an origin and destination for your next journey."}
+        <Modal
+          visible={showRailBrowser}
+          animationType="slide"
+          onRequestClose={() => setShowRailBrowser(false)}
+        >
+          <View style={s.modalScreen}>
+            <View style={s.modalHeader}>
+              <View>
+                <Eyebrow>02 / YOUR RAIL NETWORK</Eyebrow>
+                <Text style={s.modalTitle}>
+                  {locale === "de" ? "Route auf der Karte wählen" : "Choose a route on the map"}
                 </Text>
               </View>
-              <Text style={s.customTitle}>
-                {showCustomBuilder ? "−" : "+"}
-              </Text>
-            </Pressable>
-            {showCustomBuilder && (
-              <CustomRouteBuilder
-                onStart={onCustomStart}
+              <Pressable
+                accessibilityRole="button"
+                accessibilityLabel="Close"
+                onPress={() => setShowRailBrowser(false)}
+                style={s.modalClose}
+              >
+                <Text style={s.modalCloseText}>×</Text>
+              </Pressable>
+            </View>
+            <ScrollView contentContainerStyle={s.modalContent}>
+              <GermanyBrowser
+                key={launchCountryId}
+                stages={launchStages}
+                selectedId={selectedCatalogStage?.id ?? ""}
                 progress={progress}
+                onSelect={(index) => {
+                  setLaunchIndex(index);
+                  setCustomStage(null);
+                }}
+                onRecords={onRecords}
               />
-            )}
+              <RailCatalogNote />
+              <Button
+                title={locale === "de" ? "Diese Route wählen" : "Use this route"}
+                disabled={!selectedCatalogStage}
+                onPress={() => setShowRailBrowser(false)}
+                style={s.modalConfirm}
+              />
+            </ScrollView>
           </View>
+        </Modal>
+        {onCustomStart && (
+          <Modal
+            visible={showCustomBuilder}
+            animationType="slide"
+            onRequestClose={() => setShowCustomBuilder(false)}
+          >
+            <View style={s.modalScreen}>
+              <View style={s.modalHeader}>
+                <View>
+                  <Eyebrow>02 / CUSTOM JOURNEY</Eyebrow>
+                  <Text style={s.modalTitle}>
+                    {locale === "de" ? "Eigene Route planen" : "Build your route"}
+                  </Text>
+                </View>
+                <Pressable
+                  accessibilityRole="button"
+                  accessibilityLabel="Close"
+                  onPress={() => setShowCustomBuilder(false)}
+                  style={s.modalClose}
+                >
+                  <Text style={s.modalCloseText}>×</Text>
+                </Pressable>
+              </View>
+              <ScrollView contentContainerStyle={s.modalContent}>
+                <CustomRouteBuilder
+                  progress={progress}
+                  onStart={(stage) => {
+                    setCustomStage(stage);
+                    setLaunchIndex(null);
+                    setShowCustomBuilder(false);
+                  }}
+                />
+              </ScrollView>
+            </View>
+          </Modal>
         )}
         <AdSlot placement="explore" />
         <View style={s.footer}>
@@ -561,6 +623,97 @@ const s = StyleSheet.create({
     fontFamily: F.regular,
     fontSize: 11,
     color: C.muted,
+  },
+  methodRow: {
+    flexDirection: "row",
+    gap: 12,
+  },
+  methodRowMobile: {
+    flexDirection: "column",
+  },
+  methodCard: {
+    flex: 1,
+    minHeight: 150,
+    padding: 16,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: C.line,
+    backgroundColor: "#FFFFFF",
+  },
+  methodIcon: {
+    width: 42,
+    height: 42,
+    borderRadius: 21,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#EAF2FF",
+    marginBottom: 12,
+  },
+  methodTitle: {
+    fontFamily: F.bold,
+    fontSize: 15,
+    color: C.ink,
+  },
+  methodBody: {
+    marginTop: 5,
+    fontFamily: F.regular,
+    fontSize: 11,
+    lineHeight: 16,
+    color: C.muted,
+  },
+  methodLink: {
+    marginTop: 12,
+    fontFamily: F.bold,
+    fontSize: 11,
+    color: C.primary,
+  },
+  modalScreen: {
+    flex: 1,
+    backgroundColor: C.paper,
+  },
+  modalHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: 16,
+    paddingHorizontal: 24,
+    paddingVertical: 18,
+    borderBottomWidth: 1,
+    borderBottomColor: C.line,
+    backgroundColor: "#FFFFFF",
+  },
+  modalTitle: {
+    marginTop: 4,
+    fontFamily: F.bold,
+    fontSize: 22,
+    color: C.ink,
+  },
+  modalClose: {
+    width: 42,
+    height: 42,
+    borderRadius: 21,
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 1,
+    borderColor: C.line,
+  },
+  modalCloseText: {
+    marginTop: -2,
+    fontFamily: F.regular,
+    fontSize: 30,
+    color: C.ink,
+  },
+  modalContent: {
+    width: "100%",
+    maxWidth: 1220,
+    alignSelf: "center",
+    padding: 24,
+    paddingBottom: 80,
+  },
+  modalConfirm: {
+    alignSelf: "flex-end",
+    minWidth: 220,
+    marginTop: 24,
   },
   quickRouteLockedText: {
     fontFamily: F.medium,

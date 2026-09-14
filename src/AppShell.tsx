@@ -194,6 +194,8 @@ function AppContent() {
           }}
           onStart={start}
           onCustomStart={(stage) => setJourney({ stage, attempt: Date.now() })}
+          onRecords={() => setPanel("records")}
+          onSettings={() => setPanel("settings")}
           onTutorial={startTutorial}
         />
       )}
