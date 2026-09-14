@@ -18,13 +18,10 @@ import Svg, {
 import { COUNTRIES, getCountry, getCountryStages } from "../data/countries";
 import type { Stage } from "../data/stages";
 import { stageRules } from "../game/engine";
-import { Progress, isStageUnlocked, recordKey } from "../game/progress";
+import { Progress, isStageUnlocked } from "../game/progress";
 import { useI18n } from "../i18n";
 import { C, F } from "../theme";
-import { RouteMap } from "./RouteMap";
 import { Button, Eyebrow, Icon } from "./ui";
-import { GermanyBrowser } from "../features/explorer/GermanyBrowser";
-import { RailCatalogNote } from "../features/explorer/RailCatalogNote";
 import { CustomRouteBuilder } from "../features/custom/CustomRouteBuilder";
 import { AdSlot } from "../features/ads/AdSlot";
 
@@ -35,8 +32,6 @@ type Props = {
   onCountry: (country: string) => void;
   onTutorial: () => void;
   onStart: (stage: Stage) => void;
-  onRecords: () => void;
-  onSettings: () => void;
   onCustomStart?: (stage: Stage) => void;
 };
 export function ExplorerScreen({
@@ -46,23 +41,34 @@ export function ExplorerScreen({
   onCountry,
   onTutorial,
   onStart,
-  onRecords,
-  onSettings,
   onCustomStart,
 }: Props) {
   const { width } = useWindowDimensions();
   const mobile = width < 760;
   const tablet = width < 1080;
-  const { t, l, n, locale } = useI18n();
+  const { t, l, locale } = useI18n();
   const [showCustomBuilder, setShowCustomBuilder] = useState(false);
-  const [quickLaunchOpen, setQuickLaunchOpen] = useState(true);
-  const country = getCountry(progress.countryId);
-  const stages = getCountryStages(country.id);
-  const stage = stages[selected] ?? stages[0];
-  const rules = stage ? stageRules(stage, progress.profile) : null;
-  const completed = stages.filter(
-    (item) => progress.records[recordKey(item.id, progress.profile)]?.stars,
-  ).length;
+  const [launchCountryId, setLaunchCountryId] = useState(progress.countryId);
+  const [launchIndex, setLaunchIndex] = useState(selected);
+  const launchCountry = getCountry(launchCountryId);
+  const launchStages = getCountryStages(launchCountryId);
+  const selectedLaunchStage = launchStages[launchIndex] ?? launchStages[0];
+  const launchRules =
+    selectedLaunchStage ? stageRules(selectedLaunchStage, progress.profile) : null;
+  const launchUnlocked = selectedLaunchStage
+    ? isStageUnlocked(progress, selectedLaunchStage, progress.profile)
+    : false;
+  const canStartLaunch = Boolean(selectedLaunchStage && launchUnlocked);
+  const selectLaunchCountry = (countryId: string) => {
+    setLaunchCountryId(countryId);
+    setLaunchIndex(0);
+  };
+  const launch = () => {
+    if (!selectedLaunchStage || !canStartLaunch) return;
+    onCountry(launchCountryId);
+    onSelect(launchIndex);
+    onStart(selectedLaunchStage);
+  };
   return (
     <ScrollView testID="home-screen" contentContainerStyle={s.scroll}>
       <View style={[s.container, mobile && s.mobileContainer]}>
@@ -77,106 +83,135 @@ export function ExplorerScreen({
             >
               {t("heroBody")}
             </Text>
-            <Pressable
-              accessibilityRole="button"
-              onPress={() => setQuickLaunchOpen((value) => !value)}
-              style={s.heroLink}
-            >
-              <Text style={s.heroLinkText}>
-                {quickLaunchOpen ? t("quickLaunchClose") : t("quickLaunchOpen")}
-              </Text>
-              <Icon name="arrow" color={C.paper} size={17} />
-            </Pressable>
-            {quickLaunchOpen && (
-              <View style={s.quickLaunchCard}>
-                <Eyebrow>{t("routeLauncher")}</Eyebrow>
-                <View style={s.quickCountries}>
-                  {COUNTRIES.map((item) => (
-                    <Pressable
-                      key={item.id}
-                      testID={`quick-country-${item.id}`}
-                      accessibilityRole="button"
-                      accessibilityLabel={l(item.name)}
-                      aria-pressed={item.id === country.id}
-                      onPress={() => onCountry(item.id)}
+            <View style={s.quickLaunchCard}>
+              <Eyebrow>{t("routeLauncher")}</Eyebrow>
+              <View style={s.quickCountries}>
+                {COUNTRIES.map((item) => (
+                  <Pressable
+                    key={item.id}
+                    testID={`quick-country-${item.id}`}
+                    accessibilityRole="button"
+                    accessibilityLabel={l(item.name)}
+                    aria-pressed={item.id === launchCountryId}
+                    onPress={() => selectLaunchCountry(item.id)}
+                    style={[
+                      s.quickCountry,
+                      item.id === launchCountryId && s.quickCountryActive,
+                      item.status === "planned" && s.quickCountryPlanned,
+                    ]}
+                  >
+                    <Text
                       style={[
-                        s.quickCountry,
-                        item.id === country.id && s.quickCountryActive,
-                        item.status === "planned" && s.quickCountryPlanned,
+                        s.quickCountryText,
+                        item.id === launchCountryId && s.quickCountryActiveText,
                       ]}
                     >
-                      <Text
-                        style={[
-                          s.quickCountryText,
-                          item.id === country.id && s.quickCountryActiveText,
-                        ]}
-                      >
-                        {l(item.name)}
-                      </Text>
-                    </Pressable>
-                  ))}
+                      {l(item.name)}
+                    </Text>
+                  </Pressable>
+                ))}
+              </View>
+              {launchStages.length === 0 ? (
+                <View style={s.empty}>
+                  <Eyebrow>{launchCountry.nativeName.toUpperCase()}</Eyebrow>
+                  <Text style={s.sectionBody}>{t("countryEmptyBody", { country: l(launchCountry.name) })}</Text>
+                  <Button
+                    title={t("exploreGermany")}
+                    secondary
+                    onPress={() => selectLaunchCountry("DE")}
+                    style={{ minWidth: 240 }}
+                  />
                 </View>
-                <ScrollView
-                  horizontal
-                  showsHorizontalScrollIndicator={false}
-                  contentContainerStyle={s.quickRoutes}
-                >
-                  {stages.map((candidate, index) => {
-                    const unlocked = isStageUnlocked(
-                      progress,
-                      candidate,
-                      progress.profile,
-                    );
-                    return (
-                      <Pressable
-                        key={candidate.id}
-                        accessibilityRole="button"
-                        accessibilityLabel={`${candidate.city} ${candidate.line}`}
-                        disabled={!unlocked}
-                        aria-pressed={index === selected}
-                        onPress={() => onSelect(index)}
-                        style={[
-                          s.quickRoute,
-                          index === selected && s.quickRouteActive,
-                          !unlocked && s.quickRouteLocked,
-                        ]}
-                      >
-                        <Text
+              ) : (
+                <>
+                  <ScrollView
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                    contentContainerStyle={s.quickRoutes}
+                  >
+                    {launchStages.map((candidate, index) => {
+                      const unlocked = isStageUnlocked(
+                        progress,
+                        candidate,
+                        progress.profile,
+                      );
+                      return (
+                        <Pressable
+                          key={candidate.id}
+                          accessibilityRole="button"
+                          accessibilityLabel={`${candidate.city} ${candidate.line}`}
+                          disabled={!unlocked}
+                          aria-pressed={index === launchIndex}
+                          onPress={() => setLaunchIndex(index)}
                           style={[
-                            s.quickRouteName,
-                            index === selected && s.quickRouteActiveText,
-                            !unlocked && s.quickRouteDisabled,
+                            s.quickRoute,
+                            index === launchIndex && s.quickRouteActive,
+                            !unlocked && s.quickRouteLocked,
                           ]}
                         >
-                          {l(candidate.areaName ?? candidate.city)}
-                        </Text>
-                        <Text
-                          style={[
-                            s.quickRouteMeta,
-                            index === selected && { color: C.primary },
-                          ]}
-                        >
-                          {candidate.line}
-                        </Text>
-                        {!unlocked && (
-                          <Text style={s.quickRouteLockedText}>
-                            {t("locked")}
+                          <Text
+                            style={[
+                              s.quickRouteName,
+                              index === launchIndex && s.quickRouteActiveText,
+                              !unlocked && s.quickRouteDisabled,
+                            ]}
+                          >
+                            {l(candidate.areaName ?? candidate.city)}
                           </Text>
-                        )}
-                      </Pressable>
-                    );
-                  })}
-                </ScrollView>
-                {stage && (
+                          <Text
+                            style={[
+                              s.quickRouteMeta,
+                              index === launchIndex && { color: C.primary },
+                            ]}
+                          >
+                            {candidate.line}
+                          </Text>
+                          {!unlocked && (
+                            <Text style={s.quickRouteLockedText}>
+                              {t("locked")}
+                            </Text>
+                          )}
+                        </Pressable>
+                      );
+                    })}
+                  </ScrollView>
+                  {selectedLaunchStage && (
+                    <View style={s.quickSummary}>
+                      <View>
+                        <Text style={s.quickSummaryTitle}>
+                          {l(selectedLaunchStage.areaName ?? selectedLaunchStage.city)}
+                        </Text>
+                        <Text style={s.quickSummaryMeta}>
+                          {selectedLaunchStage.origin} →{" "}
+                          {selectedLaunchStage.stations.at(-1)}
+                        </Text>
+                      </View>
+                      <Text style={s.statValue}>
+                        {t("route")} {selectedLaunchStage.line}
+                      </Text>
+                      <Text style={s.quickSummaryMeta}>
+                        {t("stops")}: {selectedLaunchStage.stations.length}
+                        {launchRules
+                          ? `  ·  ${t("timeLimit")}: ${launchRules.seconds}s`
+                          : ""}
+                      </Text>
+                    </View>
+                  )}
                   <Button
                     testID="hero-start"
                     title={t("start")}
-                    onPress={() => onStart(stage)}
+                    disabled={!canStartLaunch}
+                    onPress={launch}
                     style={s.quickStartButton}
                   />
-                )}
-              </View>
-            )}
+                  {!canStartLaunch && (
+                    <Text style={s.quickRouteLockedText}>
+                      {t("locked")}
+                    </Text>
+                  )}
+                </>
+              )}
+            </View>
           </View>
           {!mobile && (
             <View style={{ width: tablet ? 300 : 390, height: 244 }}>
@@ -214,237 +249,39 @@ export function ExplorerScreen({
             />
           </View>
         )}
-        <View style={s.countryHeading}>
-          <View>
-            <Text style={s.sectionTitle}>{t("chooseCountry")}</Text>
-            <Text style={s.sectionBody}>{t("chooseCountryBody")}</Text>
-          </View>
-          <Eyebrow>01 / EUROPE</Eyebrow>
-        </View>
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={s.countries}
-        >
-          {COUNTRIES.map((item) => (
+        {onCustomStart && (
+          <View style={s.customSection}>
             <Pressable
-              key={item.id}
-              testID={`country-${item.id}`}
+              testID="custom-builder-toggle"
               accessibilityRole="button"
-              accessibilityLabel={l(item.name)}
-              aria-pressed={item.id === country.id}
-              onPress={() => onCountry(item.id)}
-              style={[s.countryCard, item.id === country.id && s.countryActive]}
+              aria-expanded={showCustomBuilder}
+              onPress={() => setShowCustomBuilder(!showCustomBuilder)}
+              style={s.customToggle}
             >
-              <CountryFlag id={item.id} />
-              <View>
-                <Text style={s.countryName}>{l(item.name)}</Text>
-                <Text
-                  style={[
-                    s.countryStatus,
-                    item.status === "available" && { color: C.primary },
-                  ]}
-                >
-                  {t(item.status === "available" ? "available" : "planned")}
+              <Icon name="ticket" size={22} color={C.primary} />
+              <View style={{ flex: 1 }}>
+                <Text style={s.customTitle}>
+                  {locale === "de"
+                    ? "Eigene Route planen"
+                    : "Build your route"}
+                </Text>
+                <Text style={s.sectionBody}>
+                  {locale === "de"
+                    ? "Wähle Start und Ziel für deine nächste Reise."
+                    : "Choose an origin and destination for your next journey."}
                 </Text>
               </View>
-              {item.id === country.id && (
-                <Icon name="check" size={16} color={C.primary} />
-              )}
-            </Pressable>
-          ))}
-        </ScrollView>
-
-        {!stage || !rules ? (
-          <View testID="country-coming-soon" style={s.empty}>
-            <View style={[s.emptySticker, { backgroundColor: country.color }]}>
-              <Icon name="map" size={38} />
-            </View>
-            <Eyebrow>{country.nativeName.toUpperCase()}</Eyebrow>
-            <Text style={s.emptyTitle}>{t("countryEmpty")}</Text>
-            <Text style={s.emptyBody}>
-              {t("countryEmptyBody", { country: l(country.name) })}
-            </Text>
-            <Button
-              title={t("exploreGermany")}
-              onPress={() => onCountry("DE")}
-              style={{ minWidth: 240 }}
-            />
-          </View>
-        ) : (
-          <>
-            <GermanyBrowser
-              key={country.id}
-              stages={stages}
-              selectedId={stage.id}
-              progress={progress}
-              onSelect={onSelect}
-              onRecords={onRecords}
-            />
-            <RailCatalogNote />
-            {onCustomStart && (
-              <View style={s.customSection}>
-                <Pressable
-                  testID="custom-builder-toggle"
-                  accessibilityRole="button"
-                  aria-expanded={showCustomBuilder}
-                  onPress={() => setShowCustomBuilder(!showCustomBuilder)}
-                  style={s.customToggle}
-                >
-                  <Icon name="ticket" size={22} color={C.primary} />
-                  <View style={{ flex: 1 }}>
-                    <Text style={s.customTitle}>
-                      {locale === "de"
-                        ? "Eigene Route planen"
-                        : "Build your route"}
-                    </Text>
-                    <Text style={s.sectionBody}>
-                      {locale === "de"
-                        ? "Wähle Start und Ziel für deine nächste Reise."
-                        : "Choose an origin and destination for your next journey."}
-                    </Text>
-                  </View>
-                  <Text style={s.customTitle}>
-                    {showCustomBuilder ? "−" : "+"}
-                  </Text>
-                </Pressable>
-                {showCustomBuilder && (
-                  <CustomRouteBuilder
-                    onStart={onCustomStart}
-                    progress={progress}
-                  />
-                )}
-              </View>
-            )}
-            <View style={{ marginTop: 30 }}>
-              <Eyebrow>
-                {locale === "de"
-                  ? "03 / DEINE AUSGEWÄHLTE REISE"
-                  : "03 / YOUR SELECTED JOURNEY"}
-              </Eyebrow>
-            </View>
-            <View
-              style={[
-                s.departure,
-                mobile && { flexDirection: "column-reverse" },
-              ]}
-            >
-              <View style={s.mapCard}>
-                <View style={s.mapHeading}>
-                  <View>
-                    <Eyebrow>
-                      {stage.journeyKind === "regional"
-                        ? l({
-                            en: "Across the state",
-                            de: "Durch das Bundesland",
-                          })
-                        : t("exploreCity")}
-                    </Eyebrow>
-                    <Text style={s.city}>
-                      {stage.areaName ? l(stage.areaName) : stage.city}
-                    </Text>
-                  </View>
-                  <View style={s.routeBadge}>
-                    <Icon name="train" size={17} />
-                    <Text style={s.routeBadgeText}>
-                      {t("route")} {stage.line}
-                    </Text>
-                  </View>
-                </View>
-                <RouteMap stage={stage} preview={!mobile} />
-                <View style={s.routeEnds}>
-                  <Icon name="train" size={15} color={C.muted} />
-                  <Text numberOfLines={1} style={s.routeEnd}>
-                    {stage.origin}
-                  </Text>
-                  <View style={s.routeLine} />
-                  <Icon name="flag" size={14} color={C.muted} />
-                  <Text numberOfLines={1} style={s.routeEnd}>
-                    {stage.stations.at(-1)}
-                  </Text>
-                </View>
-              </View>
-              <View style={[s.ticket, mobile && { width: "100%" }]}>
-                <View style={s.ticketTop}>
-                  <Eyebrow>{t("nextDeparture")}</Eyebrow>
-                  <Text style={s.ticketNumber}>#{stage.line}</Text>
-                </View>
-                <View style={s.level}>
-                  <View
-                    style={[s.levelDot, { backgroundColor: stage.color }]}
-                  />
-                  <Text style={s.levelText}>
-                    {t(stage.difficulty)} · {t("solo")}
-                  </Text>
-                </View>
-                <Text style={s.ticketTitle}>{l(stage.title)}</Text>
-                <Text style={s.ticketBody}>{l(stage.subtitle)}</Text>
-                <View style={s.tripStats}>
-                  {[
-                    [t("stops"), stage.stations.length],
-                    [t("timeLimit"), `${rules.seconds}s`],
-                    [t("characters"), rules.totalChars],
-                  ].map(([label, value]) => (
-                    <View key={label}>
-                      <Text style={s.statLabel}>{label}</Text>
-                      <Text
-                        testID={
-                          label === t("timeLimit") ? "stage-time" : undefined
-                        }
-                        style={s.statValue}
-                      >
-                        {value}
-                      </Text>
-                    </View>
-                  ))}
-                </View>
-                <View style={s.rule} />
-                <Text style={s.inputLabel}>{t("inputMode")}</Text>
-                <Text testID="detected-profile" style={s.inputLabel}>
-                  {t(
-                    progress.profile === "touch" ? "touchFull" : "keyboardFull",
-                  )}
-                </Text>
-                <Text style={s.inputNote}>
-                  {t(
-                    progress.profile === "touch" ? "touchNote" : "keyboardNote",
-                  )}
-                </Text>
-                <Text testID="spelling-bonus" style={s.bonus}>
-                  {t("spellingBonus")}
-                </Text>
-                <Button
-                  title={t("start")}
-                  onPress={() => onStart(stage)}
-                  testID="start-journey"
-                />
-                <Text style={s.passHint}>
-                  {t("passHint", { score: n(rules.thresholds[0]) })}
-                </Text>
-                <Pressable
-                  accessibilityRole="button"
-                  onPress={onSettings}
-                  style={s.settingsLink}
-                >
-                  <Text style={s.settingsLinkText}>{t("settings")} ↗</Text>
-                </Pressable>
-              </View>
-            </View>
-            <View
-              style={[
-                s.tipRow,
-                mobile && { flexDirection: "column", alignItems: "flex-start" },
-              ]}
-            >
-              <View style={s.tip}>
-                <Icon name="spark" size={17} color={C.orange} />
-                <Text style={s.tipText}>{t("tip")}</Text>
-              </View>
-              <Text style={s.completeText}>
-                {t("completeCount", { count: completed, total: stages.length })}
+              <Text style={s.customTitle}>
+                {showCustomBuilder ? "−" : "+"}
               </Text>
-            </View>
-          </>
+            </Pressable>
+            {showCustomBuilder && (
+              <CustomRouteBuilder
+                onStart={onCustomStart}
+                progress={progress}
+              />
+            )}
+          </View>
         )}
         <AdSlot placement="explore" />
         <View style={s.footer}>
@@ -704,6 +541,25 @@ const s = StyleSheet.create({
   quickRouteMeta: {
     fontFamily: F.medium,
     fontSize: 10,
+    color: C.muted,
+  },
+  quickSummary: {
+    padding: 14,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: C.line,
+    gap: 5,
+    backgroundColor: "#F8FAFD",
+  },
+  quickSummaryTitle: {
+    fontFamily: F.bold,
+    fontSize: 16,
+    color: C.ink,
+  },
+  quickSummaryMeta: {
+    marginTop: 3,
+    fontFamily: F.regular,
+    fontSize: 11,
     color: C.muted,
   },
   quickRouteLockedText: {
